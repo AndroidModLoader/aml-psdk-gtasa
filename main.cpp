@@ -2,7 +2,8 @@
 #include <mod/logger.h>
 #include <mod/config.h>
 
-#include <aml-psdk/game/engine/CTimer.h>
+#include <aml-psdk/game/base/Timer.h>
+#include <aml-psdk/game/base/Vector.h>
 
 MYMODCFG(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 //MYMOD(net.psdk.mymod.guid, AML PSDK Template NoConfig, 1.0, Author)
