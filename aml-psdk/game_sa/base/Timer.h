@@ -39,6 +39,19 @@ struct CTimer
     DECL_VALUE_PLT_BOOL(m_CodePause, BYBIT(0x6794C4, 0x8509A0));
     DECL_VALUE_PLT_BOOL(bSlowMotionActive, BYBIT(0x6786A0, 0x84ED68));
     DECL_VALUE_PLT_BOOL(bSkipProcessThisFrame, BYBIT(0x679250, 0x8504B8));
+
+    inline u32 GetTimeMS()
+    {
+        return m_snTimeInMilliseconds;
+    }
+    inline float GetTimeScale()
+    {
+        return ms_fTimeScale;
+    }
+    inline float GetTimeStep()
+    {
+        return ms_fTimeStep;
+    }
 };
 
 #endif // __AML_PSDK_SATIMER_H

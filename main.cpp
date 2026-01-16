@@ -2,8 +2,8 @@
 #include <mod/logger.h>
 #include <mod/config.h>
 
-#include <aml-psdk/game/base/Timer.h>
-#include <aml-psdk/game/base/Vector.h>
+// Do not include all like a crazy! It will slowdown the mod loading!
+#include <aml-psdk/game_sa/base/Timer.h>
 
 MYMODCFG(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 //MYMOD(net.psdk.mymod.guid, AML PSDK Template NoConfig, 1.0, Author)
@@ -24,5 +24,5 @@ ON_MOD_LOAD()
 {
     logger->SetTag("PSDK Template");
     
-    HOOK(CTimer__Update, CTimer::Update);
+    HOOK(CTimer__Update, CTimer::Update); // just an example!
 }

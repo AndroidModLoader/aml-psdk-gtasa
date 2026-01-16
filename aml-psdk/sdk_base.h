@@ -6,6 +6,21 @@
 #include <mod/amlmod.h>
 #include <stdint.h>
 
+#define SQ(_v) (_v * _v)
+
+struct SimpleVTable
+{
+    virtual void BaseDestructor();
+    virtual void MyDestructor();
+
+    inline void* ptr() { return (void*)this; }
+    inline uintptr_t addr() { return (uintptr_t)this; }
+    inline uintptr_t& vtable() { return *(uintptr_t*)this; }
+    inline void setvtable(uintptr_t addr) { *(uintptr_t*)this = addr; }
+
+    inline operator uintptr_t() const { return (uintptr_t)this; }
+};
+
 typedef int8_t i8;
 typedef uint8_t u8;
 typedef int16_t i16;
@@ -79,13 +94,13 @@ inline Type GetMainLibrarySymbol(const char* sym)
         template<class C> \
         _type operator++(int unusedVar) { \
             _type tVal = Get(); \
-            Set( Get() + 1 ); \
+            Set( Get() + (const _type)1 ); \
             return tVal; \
         } \
         template<class C> \
         _type operator--(int unusedVar) { \
             _type tVal = Get(); \
-            Set( Get() - 1 ); \
+            Set( Get() - (const _type)1 ); \
             return tVal; \
         }
 
@@ -98,11 +113,11 @@ inline Type GetMainLibrarySymbol(const char* sym)
         const _type& operator&=(const C& v) { return Set( Get() & (const _type)v ); }
 
 #define DECL_VALUE_RETURN_BASE(_type) \
-        operator _type() const { return (_type)Get(); }
+        operator _type() { return (_type)Get(); }
 
 #define DECL_VALUE_RETURN_BASE_REF(_type) \
         operator _type&() { return (_type&)Get(); } \
-        operator _type() const { return (_type)Get(); }
+        operator _type() { return (_type)Get(); }
 
 #define DECL_VALUE_TAIL(_type, _name) \
         static inline _type* Ptr() { return &Get(); } \
@@ -115,11 +130,13 @@ inline Type GetMainLibrarySymbol(const char* sym)
     }; inline ValueProxy_##_name _name
 
 
+
 #define DECL_VALUE_PLT_I32(_name, _addr) \
     DECL_VALUE_HEAD(i32, _name) \
         DECL_VALUE_PLT_BASE(i32, _name, _addr) \
         DECL_VALUE_NUMBER_BASE(i32) \
         DECL_VALUE_BITOPS_BASE(i32) \
+        DECL_VALUE_RETURN_BASE(int) \
     DECL_VALUE_TAIL(i32, _name)
 
 #define DECL_VALUE_PLT_BOOL(_name, _addr) \
@@ -127,6 +144,7 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_PLT_BASE(bool, _name, _addr) \
         DECL_VALUE_NUMBER_BASE(bool) \
         DECL_VALUE_BITOPS_BASE(bool) \
+        DECL_VALUE_RETURN_BASE(int) \
     DECL_VALUE_TAIL(bool, _name)
 
 #define DECL_VALUE_PLT_U32(_name, _addr) \
@@ -134,14 +152,15 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_PLT_BASE(u32, _name, _addr) \
         DECL_VALUE_NUMBER_BASE(u32) \
         DECL_VALUE_BITOPS_BASE(u32) \
+        DECL_VALUE_RETURN_BASE(unsigned int) \
     DECL_VALUE_TAIL(u32, _name)
 
 #define DECL_VALUE_PLT_FLT(_name, _addr) \
     DECL_VALUE_HEAD(float, _name) \
         DECL_VALUE_PLT_BASE(float, _name, _addr) \
         DECL_VALUE_NUMBER_BASE(float) \
-        DECL_VALUE_RETURN_BASE(i32) \
-        DECL_VALUE_RETURN_BASE(u32) \
+        DECL_VALUE_RETURN_BASE(float) \
+        DECL_VALUE_RETURN_BASE(int) \
     DECL_VALUE_TAIL(float, _name)
 
 #endif // __AML_PSDK_BASE_H
