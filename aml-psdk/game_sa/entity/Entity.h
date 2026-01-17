@@ -1,15 +1,15 @@
 #ifndef __AML_PSDK_SAENTITY_H
 #define __AML_PSDK_SAENTITY_H
 
-#include "Placeable.h"
 #include <aml-psdk/gta_base/Rect.h>
+#include "Placeable.h"
+#include "../base/ColModel.h"
 
 struct RwObject;
 struct RpClump;
 struct RpAtomic;
 struct CPhysical;
 struct CReference;
-struct CColModel;
 struct C2dEffect;
 
 enum eEntityType : u8
@@ -43,7 +43,7 @@ enum eEntityStatus : u8
 DECL_CLASS_BASED(CEntity, CPlaceable)
     // Construct/Deconstruct functions
     DECL_CTORCALL(CEntity, _ZN7CEntityC2Ev);
-    //DECL_DTORCALL(CEntity, _ZN7CEntityD0Ev);
+    DECL_DTORCALL(CEntity, _ZN7CEntityD2Ev);
 
     // Virtual functions
     virtual int Add();
@@ -210,7 +210,6 @@ DECL_CLASS_BASED(CEntity, CPlaceable)
         };
     };
 DECL_CLASS_END()
-
 CHECKSIZE(CEntity, 0x3C, 0x60);
 
 #endif // __AML_PSDK_SAENTITY_H

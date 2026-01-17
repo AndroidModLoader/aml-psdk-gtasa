@@ -187,12 +187,12 @@ inline Type GetMainLibrarySymbol(const char* sym)
 // Class functions
 
 #define DECL_CTORCALL(_clsName, _sym) \
-    static inline auto FuncProxy_##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
-    _clsName() { FuncProxy_##_clsName(this); }
+    static inline auto FuncProxy_ctor##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
+    _clsName() { FuncProxy_ctor##_clsName(this); }
 
 #define DECL_DTORCALL(_clsName, _sym) \
-    static inline auto FuncProxy_##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
-    ~_clsName() { FuncProxy_##_clsName(this); }
+    static inline auto FuncProxy_dtor##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
+    ~_clsName() { FuncProxy_dtor##_clsName(this); }
 
 #define DECL_THISCALL_HEAD(_name, _sym, _ret, ...) \
     static inline auto FuncProxy_##_name = GetMainLibrarySymbol<_ret(*)(ThisClass* VA_ARGS(__VA_ARGS__))>(#_sym); \
