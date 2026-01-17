@@ -7,6 +7,7 @@
 #include <stdint.h>
 
 #define SQ(_v) (_v * _v)
+#define CLASS_OFFSET(_cls, _var) (intptr_t)(&(((_cls*)(NULL))->_var))
 #define VA_ARGS(...) , ##__VA_ARGS__
 
 struct SimpleVTable
@@ -186,9 +187,16 @@ inline Type GetMainLibrarySymbol(const char* sym)
     };
 // Class functions
 
+#define DECL_CTORCALL_ARG_HEAD(_clsName, _sym, ...) \
+    static inline auto FuncProxy_ctor##_clsName = GetMainLibrarySymbol<void(*)(ThisClass* VA_ARGS(__VA_ARGS__))>(#_sym); \
+    _clsName(__VA_ARGS__) { FuncProxy_ctor##_clsName(
+
+#define DECL_CTORCALL_ARG_TAIL(...) \
+    this VA_ARGS(__VA_ARGS__)); }
+
 #define DECL_CTORCALL(_clsName, _sym) \
-    static inline auto FuncProxy_ctor##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
-    _clsName() { FuncProxy_ctor##_clsName(this); }
+    DECL_CTORCALL_ARG_HEAD(_clsName, _sym) \
+    DECL_CTORCALL_ARG_TAIL()
 
 #define DECL_DTORCALL(_clsName, _sym) \
     static inline auto FuncProxy_dtor##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
@@ -228,10 +236,12 @@ inline Type GetMainLibrarySymbol(const char* sym)
     #define CHECKSIZE(_cls, _s32, _s64) static_assert(sizeof(_cls)==_s64, "Validating size of " #_cls " is failed! " #_cls "'s size is not " #_s64)
     #define B64MACRO(...) __VA_ARGS__
     #define B32MACRO(...)
+    #define ALIGN_8_4 8
 #else
     #define CHECKSIZE(_cls, _s32, _s64) static_assert(sizeof(_cls)==_s32, "Validating size of " #_cls " is failed! " #_cls "'s size is not " #_s32)
     #define B32MACRO(...) __VA_ARGS__
     #define B64MACRO(...)
+    #define ALIGN_8_4 4
 #endif
 
 #endif // __AML_PSDK_BASE_H

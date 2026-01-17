@@ -113,4 +113,11 @@ struct CColPoint
     float m_fDepth;
 };
 
+struct CStoredCollPoly
+{
+    CVector      m_aMeshVertices[3];
+    bool         m_bIsActual;
+    unsigned int m_nLighting;
+};
+
 #endif // __AML_PSDK_SACOLMODEL_H

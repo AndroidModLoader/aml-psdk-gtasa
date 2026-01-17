@@ -1,3 +1,5 @@
+#pragma once
+
 enum eSurfaceType
 {
     SURFACE_DEFAULT = 0,
