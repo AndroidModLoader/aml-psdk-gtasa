@@ -18,6 +18,7 @@ struct CFire;
 struct CCoverPoint;
 struct CEntryExit;
 struct CVehicle;
+struct CWanted;
 
 struct CPedAcquaintance
 {
@@ -68,6 +69,8 @@ DECL_CLASS_BASED(CPed, CPhysical)
     DECL_CTORCALL_ARG_HEAD(CPed, _ZN4CPedC2Ej, u32 pedType)
     DECL_CTORCALL_ARG_TAIL(pedType)
     DECL_DTORCALL(CPed, _ZN4CPedD2Ev);
+    DECL_NEWCALL(CPed, BYBIT(_ZN4CPednwEj, _ZN4CPednwEm) );
+    DECL_DLCALL(CPed, _ZN4CPeddlEPv);
 
     // Virtual functions
     virtual void SetMoveAnim();
@@ -293,5 +296,11 @@ DECL_CLASS_BASED(CPed, CPhysical)
     uint32_t            LastTalkSfx;
 DECL_CLASS_END()
 CHECKSIZE(CPed, 0x7A4, 0x988);
+
+DECL_FASTCALL_SIMPLE_GLO(IsPedPointerValid, _Z17IsPedPointerValidP4CPed, bool, CPed* pPed);
+DECL_FASTCALL_SIMPLE_GLO(IsPedPointerValid_NotInWorld, _Z28IsPedPointerValid_NotInWorldP4CPed, bool, CPed* pPed);
+DECL_FASTCALL_SIMPLE_GLO(LOSBlockedBetweenPeds, _Z21LOSBlockedBetweenPedsP7CEntityS0_, bool, CEntity* pPed1, CEntity* pPed2);
+DECL_FASTCALL_SIMPLE_GLO(SetPedAtomicVisibilityCB, _Z24SetPedAtomicVisibilityCBP8RwObjectPv, RwObject*, RwObject* pObject, void* pData);
+DECL_FASTCALL_SIMPLE_GLO(RecurseFrameChildrenVisibilityCB, _Z32RecurseFrameChildrenVisibilityCBP7RwFramePv, RwFrame*, RwFrame* pFrame, void* pData);
 
 #endif // __AML_PSDK_SAPED_H

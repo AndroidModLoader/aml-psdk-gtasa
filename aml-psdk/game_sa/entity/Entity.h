@@ -11,6 +11,7 @@ struct RpAtomic;
 struct CPhysical;
 struct CReference;
 struct C2dEffect;
+struct CObject;
 
 enum eEntityType : u8
 {
@@ -211,5 +212,46 @@ DECL_CLASS_BASED(CEntity, CPlaceable)
     };
 DECL_CLASS_END()
 CHECKSIZE(CEntity, 0x3C, 0x60);
+
+DECL_CLASS_BASED(CDummy, CEntity)
+    // Construct/Deconstruct functions
+    DECL_CTORCALL(CDummy, _ZN6CDummyC2Ev);
+    DECL_DTORCALL(CDummy, _ZN6CDummyD2Ev);
+    DECL_NEWCALL(CDummy, BYBIT(_ZN6CDummynwEj, _ZN6CDummynwEm) );
+    DECL_DLCALL(CDummy, _ZN6CDummydlEPv);
+DECL_CLASS_END()
+
+DECL_CLASS_BASED(CDummyObject, CDummy)
+    // Construct/Deconstruct functions
+    DECL_CTORCALL(CDummyObject, _ZN12CDummyObjectC2Ev);
+    DECL_DTORCALL(CDummyObject, _ZN12CDummyObjectD2Ev);
+    DECL_NEWCALL(CDummyObject, BYBIT(_ZN12CDummyObjectnwEj, _ZN12CDummyObjectnwEm) );
+    DECL_DLCALL(CDummyObject, _ZN12CDummyObjectdlEPv);
+    
+    // Member functions
+
+    DECL_THISCALL_SIMPLE(CreateObject, _ZN12CDummyObject12CreateObjectEv, CObject*);
+    
+    DECL_THISCALL_HEAD(UpdateFromObject, _ZN12CDummyObject16UpdateFromObjectEP7CObject, void, CObject* pObject)
+    DECL_THISCALL_TAIL(UpdateFromObject, pObject)
+DECL_CLASS_END()
+
+DECL_CLASS_BASED(CBuilding, CEntity)
+    // Construct/Deconstruct functions
+    DECL_CTORCALL(CBuilding, _ZN9CBuildingC2Ev);
+    DECL_NEWCALL(CBuilding, BYBIT(_ZN9CBuildingnwEj, _ZN9CBuildingnwEm) );
+    DECL_DLCALL(CBuilding, _ZN9CBuildingdlEPv);
+    
+    // Member functions
+    DECL_THISCALL_HEAD(ReplaceWithNewModel, _ZN9CBuilding19ReplaceWithNewModelEi, void, int index)
+    DECL_THISCALL_TAIL(ReplaceWithNewModel, index)
+DECL_CLASS_END()
+
+DECL_CLASS_BASED(CAnimatedBuilding, CBuilding)
+    // has overloaded virtual functions
+DECL_CLASS_END()
+
+DECL_FASTCALL_SIMPLE_GLO(IsBuildingPointerValid, _Z22IsBuildingPointerValidP9CBuilding, bool, CBuilding* pBuilding);
+
 
 #endif // __AML_PSDK_SAENTITY_H

@@ -5,6 +5,7 @@
 
 #include <mod/amlmod.h>
 #include <stdint.h>
+#include <math.h>
 
 #define SQ(_v) (_v * _v)
 #define CLASS_OFFSET(_cls, _var) (intptr_t)(&(((_cls*)(NULL))->_var))
@@ -201,6 +202,14 @@ inline Type GetMainLibrarySymbol(const char* sym)
 #define DECL_DTORCALL(_clsName, _sym) \
     static inline auto FuncProxy_dtor##_clsName = GetMainLibrarySymbol<void(*)(ThisClass*)>(#_sym); \
     ~_clsName() { FuncProxy_dtor##_clsName(this); }
+
+#define DECL_NEWCALL(_clsName, _sym) \
+    static inline auto FuncProxy_opnew##_clsName = GetMainLibrarySymbol<void*(*)(size_t size)>(#_sym); \
+    void* operator new(size_t size) { return FuncProxy_opnew##_clsName(size); }
+    
+#define DECL_DLCALL(_clsName, _sym) \
+    static inline auto FuncProxy_opdel##_clsName = GetMainLibrarySymbol<void(*)(void* ptr)>(#_sym); \
+    void operator delete(void* ptr) { FuncProxy_opdel##_clsName(ptr); }
 
 #define DECL_THISCALL_HEAD(_name, _sym, _ret, ...) \
     static inline auto FuncProxy_##_name = GetMainLibrarySymbol<_ret(*)(ThisClass* VA_ARGS(__VA_ARGS__))>(#_sym); \
