@@ -4,13 +4,13 @@
 #include <aml-psdk/gta_base/Rect.h>
 #include "Placeable.h"
 #include "../base/ColModel.h"
+#include "../engine/2dEffect.h"
 
 struct RwObject;
 struct RpClump;
 struct RpAtomic;
 struct CPhysical;
 struct CReference;
-struct C2dEffect;
 struct CObject;
 
 enum eEntityType : u8

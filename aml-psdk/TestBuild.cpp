@@ -12,6 +12,8 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/entity/Automobile.h>
 #include <aml-psdk/game_sa/engine/RunningScript.h>
 #include <aml-psdk/game_sa/audio/AudioEngine.h>
+#include <aml-psdk/game_sa/engine/Draw.h>
+#include <aml-psdk/game_sa/engine/FileMgr.h>
 
 void Test()
 {

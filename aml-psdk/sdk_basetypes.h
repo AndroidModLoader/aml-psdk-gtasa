@@ -5,6 +5,28 @@
 #define CLASS_OFFSET(_cls, _var) (intptr_t)(&(((_cls*)(NULL))->_var))
 #define VA_ARGS(...) , ##__VA_ARGS__
 
+template<typename A1>
+A1 std_min(A1 val, A1 minval)
+{
+    if(val < minval) return minval;
+    return val;
+}
+
+template<typename A1>
+A1 std_max(A1 val, A1 maxval)
+{
+    if(val > maxval) return maxval;
+    return val;
+}
+
+template<typename A1>
+A1 std_minmax(A1 val, A1 minval, A1 maxval)
+{
+    if(val < minval) return minval;
+    if(val > maxval) return maxval;
+    return val;
+}
+
 struct SimpleVTable
 {
     virtual void BaseDestructor();

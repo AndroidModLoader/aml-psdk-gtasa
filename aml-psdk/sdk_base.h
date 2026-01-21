@@ -44,18 +44,21 @@ inline Type GetMainLibrarySymbol(const char* sym)
         static inline _type* m_Pointer = NULL;
 
 #define DECL_VALUE_SYM_BASE(_type, _name, _sym) \
+        _type& operator()() { return Get(); } \
         static inline _type& Get() { \
             if(!m_Pointer) m_Pointer = GetMainLibrarySymbol<_type*>(_sym); \
             return *m_Pointer; \
         }
 
 #define DECL_VALUE_PLT_BASE(_type, _name, _addr) \
+        _type& operator()() { return Get(); } \
         static inline _type& Get() { \
             if(!m_Pointer) m_Pointer = *(_type**)(GetMainLibraryAddress() + _addr); \
             return *m_Pointer; \
         }
 
 #define DECL_VALUE_NUMBER_BASE(_type) \
+        DECL_VALUE_SETTER_BASE(_type) \
         template<class C> \
         const _type& operator=(const C& v) { return Set( (const _type)v ); } \
         template<class C> \
@@ -84,6 +87,12 @@ inline Type GetMainLibrarySymbol(const char* sym)
             return tVal; \
         }
 
+#define DECL_VALUE_SETTER_BASE(_type) \
+        static inline _type& Set(const _type& v) { Get() = v; return Get(); } \
+
+#define DECL_VALUE_GETTER_BASE(_type) \
+        static inline _type* Ptr() { return &Get(); } \
+
 #define DECL_VALUE_BITOPS_BASE(_type) \
         template<class C> \
         const _type& operator^=(const C& v) { return Set( Get() ^ (const _type)v ); } \
@@ -100,18 +109,15 @@ inline Type GetMainLibrarySymbol(const char* sym)
         operator _type() { return (_type)Get(); }
 
 #define DECL_VALUE_TAIL(_type, _name) \
-        static inline _type* Ptr() { return &Get(); } \
-        static inline _type& Set(const _type& v) { Get() = v; return Get(); } \
+        DECL_VALUE_GETTER_BASE(_type) \
     }; static inline ValueProxy_##_name _name
 
 #define DECL_VALUE_TAIL_GLOBAL(_type, _name) \
-        static inline _type* Ptr() { return &Get(); } \
-        static inline _type& Set(const _type& v) { Get() = v; return Get(); } \
+        DECL_VALUE_GETTER_BASE(_type) \
     }; inline ValueProxy_##_name _name
 
 #define DECL_VALUE_OBJECT_BASE(_type) \
-        _type* operator->() { return &Get(); } \
-        _type& operator()() { return Get(); }
+        _type* operator->() { return &Get(); }
 
 // Values
 
@@ -139,6 +145,15 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_RETURN_BASE(unsigned int) \
     DECL_VALUE_TAIL(u32, _name)
 
+#define DECL_VALUE_PLT_U8(_name, _addr) \
+    DECL_VALUE_HEAD(u8, _name) \
+        DECL_VALUE_PLT_BASE(u8, _name, _addr) \
+        DECL_VALUE_NUMBER_BASE(u8) \
+        DECL_VALUE_BITOPS_BASE(u8) \
+        DECL_VALUE_RETURN_BASE(unsigned char) \
+        DECL_VALUE_RETURN_BASE(unsigned int) \
+    DECL_VALUE_TAIL(u8, _name)
+
 #define DECL_VALUE_PLT_FLT(_name, _addr) \
     DECL_VALUE_HEAD(float, _name) \
         DECL_VALUE_PLT_BASE(float, _name, _addr) \
@@ -146,6 +161,14 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_RETURN_BASE(float) \
         DECL_VALUE_RETURN_BASE(int) \
     DECL_VALUE_TAIL(float, _name)
+
+#define DECL_VALUE_PLT_CHAR(_name, _addr) \
+    DECL_VALUE_HEAD(char*, _name) \
+        DECL_VALUE_PLT_BASE(char*, _name, _addr) \
+        DECL_VALUE_RETURN_BASE(char*) \
+        DECL_VALUE_RETURN_BASE(const char*) \
+        DECL_VALUE_RETURN_BASE(uintptr_t) \
+    DECL_VALUE_TAIL(char*, _name)
 
 #define DECL_OBJECT_PLT_GLOBAL(_type, _name, _addr) \
     DECL_VALUE_HEAD(_type, _name) \

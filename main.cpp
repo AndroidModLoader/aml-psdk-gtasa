@@ -16,7 +16,7 @@ DECL_HOOKv(CTimer__Update)
 {
     CTimer__Update();
     CTimer::m_snTimeInMilliseconds += 5;
-    logger->Info("CTimer__Update: %u", CTimer::m_snTimeInMilliseconds.Get());
+    logger->Info("CTimer__Update: %u", CTimer::m_snTimeInMilliseconds);
     CTimer::m_snTimeInMilliseconds -= 5;
 }
 

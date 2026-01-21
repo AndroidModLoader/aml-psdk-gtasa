@@ -56,4 +56,24 @@ struct CTimer
     }
 };
 
+#define m_snTimeInMilliseconds m_snTimeInMilliseconds()
+#define m_snTimeInMillisecondsNonClipped m_snTimeInMillisecondsNonClipped()
+#define m_snTimeInMillisecondsPauseMode m_snTimeInMillisecondsPauseMode()
+#define m_snPreviousTimeInMilliseconds m_snPreviousTimeInMilliseconds()
+#define m_snPPreviousTimeInMilliseconds m_snPPreviousTimeInMilliseconds()
+#define m_snPPPreviousTimeInMilliseconds m_snPPPreviousTimeInMilliseconds()
+#define m_snPPPPreviousTimeInMilliseconds m_snPPPPreviousTimeInMilliseconds()
+#define m_snPreviousTimeInMillisecondsNonClipped m_snPreviousTimeInMillisecondsNonClipped()
+#define ms_fTimeScale ms_fTimeScale()
+#define ms_fSlowMotionScale ms_fSlowMotionScale()
+#define ms_fTimeStep ms_fTimeStep()
+#define ms_fTimeStepNonClipped ms_fTimeStepNonClipped()
+#define ms_fOldTimeStep ms_fOldTimeStep()
+#define game_FPS game_FPS()
+#define m_FrameCounter m_FrameCounter()
+#define m_UserPause m_UserPause()
+#define m_CodePause m_CodePause()
+#define bSlowMotionActive bSlowMotionActive()
+#define bSkipProcessThisFrame bSkipProcessThisFrame()
+
 #endif // __AML_PSDK_SATIMER_H

@@ -38,6 +38,6 @@ DECL_CLASS_END()
 CHECKSIZE(CAudioEngine, 0x1FD8, 0x2F50);
 
 DECL_OBJECT_PLT_GLOBAL(CAudioEngine, AudioEngine, BYBIT(0x675F74, 0x849F58) );
-#define AudioEngine ( AudioEngine() )
+#define AudioEngine AudioEngine()
 
 #endif // __AML_PSDK_SAAUDIOENGINE_H
