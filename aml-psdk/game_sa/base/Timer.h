@@ -42,17 +42,37 @@ struct CTimer
     DECL_VALUE_PLT_BOOL(bSkipProcessThisFrame, BYBIT(0x679250, 0x8504B8));
 
     // Helper functions
-    inline u32 GetTimeMS()
+    static inline u32 GetTimeMS()
     {
         return m_snTimeInMilliseconds;
     }
-    inline float GetTimeScale()
+    static inline u32 GetTimeInMS()
+    {
+        return m_snTimeInMilliseconds;
+    }
+    static inline float GetTimeScale()
     {
         return ms_fTimeScale;
     }
-    inline float GetTimeStep()
+    static inline float GetTimeStep()
     {
         return ms_fTimeStep;
+    }
+    static inline float GetTimeStepFix()
+    {
+        return GetTimeStep() / (50.0f / 30.0f);
+    }
+    static inline float GetTimeStepInvFix()
+    {
+        return (50.0f / 30.0f) / GetTimeStep();
+    }
+    static inline float GetTimeStepInSeconds()
+    {
+        return GetTimeStep() / 50.0f;
+    }
+    static inline bool IsPaused()
+    {
+        return ( m_UserPause() || m_CodePause() );
     }
 };
 
