@@ -21,6 +21,70 @@ struct CCamPathSplines
 };
 
 DECL_CLASS_BASED(CCamera, CPlaceable)
+    // Construct/Deconstruct functions
+    DECL_CTORCALL(CCamera, _ZN7CCameraC2Ev)
+    DECL_DTORCALL(CCamera, _ZN7CCameraD0Ev);
+
+    // Member functions
+    DECL_THISCALL_SIMPLE(GetCamDirectlyBehind, _ZN7CCamera20GetCamDirectlyBehindEv, bool);
+    DECL_THISCALL_SIMPLE(Find3rdPersonQuickAimPitch, _ZN7CCamera26Find3rdPersonQuickAimPitchEv, float);
+    DECL_THISCALL_SIMPLE(GetFading, _ZN7CCamera9GetFadingEv, u8);
+    DECL_THISCALL_SIMPLE(GetFadingDirection, _ZN7CCamera18GetFadingDirectionEv, int);
+    DECL_THISCALL_SIMPLE(InitCameraVehicleTweaks, _ZN7CCamera23InitCameraVehicleTweaksEv, void);
+    DECL_THISCALL_SIMPLE(CamControl, _ZN7CCamera10CamControlEv, void);
+    DECL_THISCALL_SIMPLE(Restore, _ZN7CCamera7RestoreEv, void);
+    DECL_THISCALL_SIMPLE(SetWideScreenOff, _ZN7CCamera16SetWideScreenOffEv, void);
+    DECL_THISCALL_SIMPLE(Using1stPersonWeaponMode, _ZN7CCamera24Using1stPersonWeaponModeEv, bool);
+    DECL_THISCALL_SIMPLE(IsTargetingActive, _ZN7CCamera17IsTargetingActiveEv, bool);
+    DECL_THISCALL_SIMPLE(ClearPlayerWeaponMode, _ZN7CCamera21ClearPlayerWeaponModeEv, void);
+    DECL_THISCALL_SIMPLE(SetCameraDirectlyBehindForFollowPed_CamOnAString, _ZN7CCamera48SetCameraDirectlyBehindForFollowPed_CamOnAStringEv, void);
+    DECL_THISCALL_SIMPLE(ProcessObbeCinemaCameraPlane, _ZN7CCamera28ProcessObbeCinemaCameraPlaneEv, void);
+    DECL_THISCALL_SIMPLE(ProcessObbeCinemaCameraHeli, _ZN7CCamera27ProcessObbeCinemaCameraHeliEv, void);
+    DECL_THISCALL_SIMPLE(ProcessObbeCinemaCameraBoat, _ZN7CCamera27ProcessObbeCinemaCameraBoatEv, void);
+    DECL_THISCALL_SIMPLE(ProcessObbeCinemaCameraTrain, _ZN7CCamera28ProcessObbeCinemaCameraTrainEv, void);
+    DECL_THISCALL_SIMPLE(ProcessObbeCinemaCameraCar, _ZN7CCamera26ProcessObbeCinemaCameraCarEv, void);
+    DECL_THISCALL_SIMPLE(DontProcessObbeCinemaCamera, _ZN7CCamera27DontProcessObbeCinemaCameraEv, void);
+    DECL_THISCALL_SIMPLE(RestoreWithJumpCut, _ZN7CCamera18RestoreWithJumpCutEv, void);
+    DECL_THISCALL_SIMPLE(DrawBordersForWideScreen, _ZN7CCamera24DrawBordersForWideScreenEv, void);
+    DECL_THISCALL_SIMPLE(GetCutsceneBarHeight, _ZN7CCamera20GetCutsceneBarHeightEv, float);
+    DECL_THISCALL_SIMPLE(Enable1rstPersonCamCntrlsScript, _ZN7CCamera31Enable1rstPersonCamCntrlsScriptEv, void);
+    DECL_THISCALL_SIMPLE(Enable1rstPersonWeaponsCamera, _ZN7CCamera29Enable1rstPersonWeaponsCameraEv, void);
+    DECL_THISCALL_SIMPLE(FinishCutscene, _ZN7CCamera14FinishCutsceneEv, void);
+    DECL_THISCALL_SIMPLE(FindCamFOV, _ZN7CCamera10FindCamFOVEv, float);
+    DECL_THISCALL_SIMPLE(GetCutSceneFinishTime, _ZN7CCamera21GetCutSceneFinishTimeEv, u32);
+    DECL_THISCALL_SIMPLE(Get_Just_Switched_Status, _ZN7CCamera24Get_Just_Switched_StatusEv, u8);
+    DECL_THISCALL_SIMPLE(GetScreenFadeStatus, _ZN7CCamera19GetScreenFadeStatusEv, int);
+    DECL_THISCALL_SIMPLE(GetGameCamPosition, _ZN7CCamera18GetGameCamPositionEv, CVector*);
+    DECL_THISCALL_SIMPLE(GetLookingLRBFirstPerson, _ZN7CCamera24GetLookingLRBFirstPersonEv, bool);
+    DECL_THISCALL_SIMPLE(GetLookDirection, _ZN7CCamera16GetLookDirectionEv, int);
+    DECL_THISCALL_SIMPLE(GetLookingForwardFirstPerson, _ZN7CCamera28GetLookingForwardFirstPersonEv, bool);
+    DECL_THISCALL_SIMPLE(GetPositionAlongSpline, _ZN7CCamera22GetPositionAlongSplineEv, float);
+    DECL_THISCALL_SIMPLE(InitialiseCameraForDebugMode, _ZN7CCamera28InitialiseCameraForDebugModeEv, void);
+    DECL_THISCALL_SIMPLE(Process, _ZN7CCamera7ProcessEv, void);
+    DECL_THISCALL_SIMPLE(UpdateTargetEntity, _ZN7CCamera18UpdateTargetEntityEv, void);
+    DECL_THISCALL_SIMPLE(ProcessScriptedCommands, _ZN7CCamera23ProcessScriptedCommandsEv, void);
+    DECL_THISCALL_SIMPLE(ProcessFade, _ZN7CCamera11ProcessFadeEv, void);
+    DECL_THISCALL_SIMPLE(ProcessMusicFade, _ZN7CCamera16ProcessMusicFadeEv, void);
+    DECL_THISCALL_SIMPLE(ProcessWideScreenOn, _ZN7CCamera19ProcessWideScreenOnEv, void);
+    DECL_THISCALL_SIMPLE(ProcessShake, _ZN7CCamera12ProcessShakeEv, void);
+    DECL_THISCALL_SIMPLE(UpdateSoundDistances, _ZN7CCamera20UpdateSoundDistancesEv, void);
+    DECL_THISCALL_SIMPLE(SetCameraUpForMirror, _ZN7CCamera20SetCameraUpForMirrorEv, void);
+    DECL_THISCALL_SIMPLE(RestoreCameraAfterMirror, _ZN7CCamera24RestoreCameraAfterMirrorEv, void);
+    DECL_THISCALL_SIMPLE(ProcessObbeCinemaCameraPed, _ZN7CCamera26ProcessObbeCinemaCameraPedEv, void);
+    DECL_THISCALL_SIMPLE(RenderMotionBlur, _ZN7CCamera16RenderMotionBlurEv, void);
+    DECL_THISCALL_SIMPLE(SetCameraDirectlyInFrontForFollowPed_CamOnAString, _ZN7CCamera49SetCameraDirectlyInFrontForFollowPed_CamOnAStringEv, void);
+    DECL_THISCALL_SIMPLE(SetWideScreenOn, _ZN7CCamera15SetWideScreenOnEv, void);
+    DECL_THISCALL_SIMPLE(StartCooperativeCamMode, _ZN7CCamera23StartCooperativeCamModeEv, void);
+    DECL_THISCALL_SIMPLE(StopCooperativeCamMode, _ZN7CCamera22StopCooperativeCamModeEv, void);
+    DECL_THISCALL_SIMPLE(ProcessVectorTrackLinear, _ZN7CCamera24ProcessVectorTrackLinearEv, void);
+    DECL_THISCALL_SIMPLE(ProcessVectorMoveLinear, _ZN7CCamera23ProcessVectorMoveLinearEv, void);
+    DECL_THISCALL_SIMPLE(ProcessFOVLerp, _ZN7CCamera14ProcessFOVLerpEv, void);
+    DECL_THISCALL_SIMPLE(GetRoughDistanceToGround, _ZN7CCamera24GetRoughDistanceToGroundEv, float);
+    DECL_THISCALL_SIMPLE(ShouldPedControlsBeRelative, _ZN7CCamera27ShouldPedControlsBeRelativeEv, u8);
+    DECL_THISCALL_SIMPLE(DeleteCutSceneCamDataMemory, _ZN7CCamera27DeleteCutSceneCamDataMemoryEv, void);
+    DECL_THISCALL_SIMPLE(Init, _ZN7CCamera4InitEv, void);
+    // TODO: ~68 functions are still waiting :,)
+
     // Helper functions
     inline unsigned char GetActiveCamNum()
     {

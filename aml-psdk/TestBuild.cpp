@@ -21,6 +21,12 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/ai/tasks/Task.h>
 #include <aml-psdk/game_sa/entity/Camera.h>
 
+DECL_HOOKv(CCamera__Process, CCamera* self)
+{
+    CCamera__Process(self);
+    logger->Info("Camera! :o");
+}
+
 void Test()
 {
     AudioEngine.m_pWeaponAudio = 0;
@@ -30,4 +36,8 @@ void Test()
     CLASS_CONSTRUCT(CTask, newTask);
     CLASS_DECONSTRUCT(CTask, newTask); // alternatively newTask->MyDestructor() from SimpleVTable or thing below (if we have it)
     //newTask->DeInstantiate();
+
+    // GET_THISCALL_ADDR only works with declared funcs
+    // HOOK(CCamera__Process, GetMainLibrarySymbol("_ZN7CCamera7ProcessEv") );
+    HOOK(CCamera__Process, GET_THISCALL_ADDR(CCamera, Process) ); // <- this definitely looks better than above :p
 }

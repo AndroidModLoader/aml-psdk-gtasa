@@ -33,7 +33,7 @@ inline uptr GetMainLibraryAddress()
     return g_pMainGameAddress;
 }
 
-template<typename Type>
+template<typename Type = void*>
 inline Type GetMainLibrarySymbol(const char* sym)
 {
     return (Type)aml->GetSym(GetMainLibrary(), sym);
@@ -311,5 +311,14 @@ inline Type GetMainLibrarySymbol(const char* sym)
 
 #define DECL_FASTCALL_SIMPLE_GLO(_name, _sym, _ret, ...) \
     inline auto _name = GetMainLibrarySymbol<_ret(*)(__VA_ARGS__)>(#_sym)
+
+#define GET_THISCALL_ADDR(_clsName, _name) \
+    ( (uintptr_t)( _clsName::FuncProxy_##_name ) )
+
+#define GET_CTOR_ADDR(_clsName) \
+    ( (uintptr_t)( _clsName::FuncProxy_ctor##_clsName ) )
+
+#define GET_DTOR_ADDR(_clsName) \
+    ( (uintptr_t)( _clsName::FuncProxy_dtor##_clsName ) )
 
 #endif // __AML_PSDK_BASE_H

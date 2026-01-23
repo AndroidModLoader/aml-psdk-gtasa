@@ -19,6 +19,7 @@ struct CCoverPoint;
 struct CEntryExit;
 struct CVehicle;
 struct CWanted;
+struct CTaskSimpleHoldEntity;
 
 struct CPedAcquaintance
 {
@@ -77,6 +78,79 @@ DECL_CLASS_BASED(CPed, CPhysical)
     virtual void SetMoveAnim();
     virtual bool Save();
     virtual bool Load();
+
+    // Member functions
+    DECL_THISCALL_SIMPLE(PedIsInvolvedInConversation, _ZN4CPed27PedIsInvolvedInConversationEv, bool);
+    DECL_THISCALL_SIMPLE(PedCanPickUpPickUp, _ZN4CPed18PedCanPickUpPickUpEv, bool);
+    DECL_THISCALL_SIMPLE(CreateDeadPedMoney, _ZN4CPed18CreateDeadPedMoneyEv, void);
+    DECL_THISCALL_SIMPLE(CreateDeadPedWeaponPickups, _ZN4CPed26CreateDeadPedWeaponPickupsEv, void);
+    DECL_THISCALL_SIMPLE(IsPlayer, _ZNK4CPed8IsPlayerEv, bool);
+    DECL_THISCALL_SIMPLE(ReleaseCoverPoint, _ZN4CPed17ReleaseCoverPointEv, void);
+    DECL_THISCALL_SIMPLE(ClearWeapons, _ZN4CPed12ClearWeaponsEv, void);
+    DECL_THISCALL_SIMPLE(UpdateStatLeavingVehicle, _ZN4CPed24UpdateStatLeavingVehicleEv, void);
+    DECL_THISCALL_SIMPLE(Initialise, _ZN4CPed10InitialiseEv, void);
+    DECL_THISCALL_SIMPLE(SetPedDefaultDecisionMaker, _ZN4CPed26SetPedDefaultDecisionMakerEv, void);
+    DECL_THISCALL_SIMPLE(CanUseTorsoWhenLooking, _ZN4CPed22CanUseTorsoWhenLookingEv, bool);
+    DECL_THISCALL_SIMPLE(Update, _ZN4CPed6UpdateEv, void);
+    DECL_THISCALL_SIMPLE(PositionAnyPedOutOfCollision, _ZN4CPed28PositionAnyPedOutOfCollisionEv, bool);
+    DECL_THISCALL_SIMPLE(ClearAimFlag, _ZN4CPed12ClearAimFlagEv, void);
+    DECL_THISCALL_SIMPLE(ClearLookFlag, _ZN4CPed13ClearLookFlagEv, void);
+    DECL_THISCALL_SIMPLE(StopNonPartialAnims, _ZN4CPed19StopNonPartialAnimsEv, void);
+    DECL_THISCALL_SIMPLE(RestartNonPartialAnims, _ZN4CPed22RestartNonPartialAnimsEv, void);
+    DECL_THISCALL_SIMPLE(ClearLook, _ZN4CPed9ClearLookEv, void);
+    DECL_THISCALL_SIMPLE(GetWeaponSkill, _ZN4CPed14GetWeaponSkillEv, i8);
+    DECL_THISCALL_SIMPLE(CanWeRunAndFireWithWeapon, _ZN4CPed25CanWeRunAndFireWithWeaponEv, bool);
+    DECL_THISCALL_SIMPLE(CalculateNewVelocity, _ZN4CPed20CalculateNewVelocityEv, void);
+    DECL_THISCALL_SIMPLE(IsPedInControl, _ZN4CPed14IsPedInControlEv, bool);
+    DECL_THISCALL_SIMPLE(UpdatePosition, _ZN4CPed14UpdatePositionEv, void);
+    DECL_THISCALL_SIMPLE(CalculateNewOrientation, _ZN4CPed23CalculateNewOrientationEv, void);
+    DECL_THISCALL_SIMPLE(ClearAll, _ZN4CPed8ClearAllEv, void);
+    DECL_THISCALL_SIMPLE(ProcessBuoyancy, _ZN4CPed15ProcessBuoyancyEv, void);
+    DECL_THISCALL_SIMPLE(RequestDelayedWeapon, _ZN4CPed20RequestDelayedWeaponEv, void);
+    DECL_THISCALL_SIMPLE(PlayFootSteps, _ZN4CPed13PlayFootStepsEv, void);
+    DECL_THISCALL_SIMPLE(IsAlive, _ZNK4CPed7IsAliveEv, bool);
+    DECL_THISCALL_SIMPLE(IsPedShootable, _ZN4CPed14IsPedShootableEv, bool);
+    DECL_THISCALL_SIMPLE(UseGroundColModel, _ZN4CPed17UseGroundColModelEv, bool);
+    DECL_THISCALL_SIMPLE(CanSetPedState, _ZN4CPed14CanSetPedStateEv, bool);
+    DECL_THISCALL_SIMPLE(CanBeArrested, _ZN4CPed13CanBeArrestedEv, bool);
+    DECL_THISCALL_SIMPLE(CanStrafeOrMouseControl, _ZN4CPed23CanStrafeOrMouseControlEv, bool);
+    DECL_THISCALL_SIMPLE(CanBeDeleted, _ZN4CPed12CanBeDeletedEv, u8);
+    DECL_THISCALL_SIMPLE(CanBeDeletedEvenInVehicle, _ZN4CPed25CanBeDeletedEvenInVehicleEv, u8);
+    DECL_THISCALL_SIMPLE(RemoveGogglesModel, _ZN4CPed18RemoveGogglesModelEv, void);
+    DECL_THISCALL_SIMPLE(PutOnGoggles, _ZN4CPed12PutOnGogglesEv, void);
+    DECL_THISCALL_SIMPLE(TakeOffGoggles, _ZN4CPed14TakeOffGogglesEv, void);
+    DECL_THISCALL_SIMPLE(ReplaceWeaponWhenExitingVehicle, _ZN4CPed31ReplaceWeaponWhenExitingVehicleEv, void);
+    DECL_THISCALL_SIMPLE(RemoveWeaponForScriptedCutscene, _ZN4CPed31RemoveWeaponForScriptedCutsceneEv, void);
+    DECL_THISCALL_SIMPLE(ReplaceWeaponForScriptedCutscene, _ZN4CPed32ReplaceWeaponForScriptedCutsceneEv, void);
+    DECL_THISCALL_SIMPLE(ResetGunFlashAlpha, _ZN4CPed18ResetGunFlashAlphaEv, void);
+    DECL_THISCALL_SIMPLE(GetBikeRidingSkill, _ZN4CPed18GetBikeRidingSkillEv, float);
+    DECL_THISCALL_SIMPLE(PreRenderAfterTest, _ZN4CPed18PreRenderAfterTestEv, void);
+    DECL_THISCALL_SIMPLE(SetIdle, _ZN4CPed7SetIdleEv, void);
+    DECL_THISCALL_SIMPLE(Look, _ZN4CPed4LookEv, void);
+    DECL_THISCALL_SIMPLE(TurnBody, _ZN4CPed8TurnBodyEv, bool);
+    DECL_THISCALL_SIMPLE(IsPointerValid, _ZN4CPed14IsPointerValidEv, bool);
+    DECL_THISCALL_SIMPLE(SetPedPositionInCar, _ZN4CPed19SetPedPositionInCarEv, void);
+    DECL_THISCALL_SIMPLE(RestoreHeadingRate, _ZN4CPed18RestoreHeadingRateEv, void);
+    DECL_THISCALL_SIMPLE(SetRadioStation, _ZN4CPed15SetRadioStationEv, void);
+    DECL_THISCALL_SIMPLE(PositionAttachedPed, _ZN4CPed19PositionAttachedPedEv, void);
+    DECL_THISCALL_SIMPLE(DettachPedFromEntity, _ZN4CPed20DettachPedFromEntityEv, void);
+    DECL_THISCALL_SIMPLE(Dress, _ZN4CPed5DressEv, void);
+    DECL_THISCALL_SIMPLE(UpdateStatEnteringVehicle, _ZN4CPed25UpdateStatEnteringVehicleEv, void);
+    DECL_THISCALL_SIMPLE(GetHoldingTask, _ZN4CPed14GetHoldingTaskEv, CTaskSimpleHoldEntity*);
+    DECL_THISCALL_SIMPLE(GetEntityThatThisPedIsHolding, _ZN4CPed29GetEntityThatThisPedIsHoldingEv, CEntity*);
+    DECL_THISCALL_SIMPLE(CanThrowEntityThatThisPedIsHolding, _ZN4CPed34CanThrowEntityThatThisPedIsHoldingEv, u8);
+    DECL_THISCALL_SIMPLE(GiveWeaponAtStartOfFight, _ZN4CPed24GiveWeaponAtStartOfFightEv, void);
+    DECL_THISCALL_SIMPLE(GiveWeaponWhenJoiningGang, _ZN4CPed25GiveWeaponWhenJoiningGangEv, void);
+    DECL_THISCALL_SIMPLE(IsPlayingHandSignal, _ZN4CPed19IsPlayingHandSignalEv, u8);
+    DECL_THISCALL_SIMPLE(StopPlayingHandSignal, _ZN4CPed21StopPlayingHandSignalEv, void);
+    DECL_THISCALL_SIMPLE(GetWalkAnimSpeed, _ZN4CPed16GetWalkAnimSpeedEv, float);
+    DECL_THISCALL_SIMPLE(UseFreeAimMagnetize, _ZN4CPed19UseFreeAimMagnetizeEv, bool);
+    DECL_THISCALL_SIMPLE(GetPedStateString, _ZN4CPed17GetPedStateStringEv, const char*);
+    DECL_THISCALL_SIMPLE(GetPedTalking, _ZN4CPed13GetPedTalkingEv, u8);
+    DECL_THISCALL_SIMPLE(EnablePedSpeech, _ZN4CPed15EnablePedSpeechEv, void);
+    DECL_THISCALL_SIMPLE(EnablePedSpeechForScriptSpeech, _ZN4CPed30EnablePedSpeechForScriptSpeechEv, void);
+    DECL_THISCALL_SIMPLE(CanPedHoldConversation, _ZN4CPed22CanPedHoldConversationEv, u8);
+    DECL_THISCALL_SIMPLE(DeadPedMakesTyresBloody, _ZN4CPed23DeadPedMakesTyresBloodyEv, void);
 
     // Member values
     CAEPedAudioEntity           m_pedAudio;
