@@ -138,6 +138,12 @@ DECL_CLASS_BASED(CEntity, CPlaceable)
     DECL_THISCALL_HEAD(CleanUpOldReference, _ZN7CEntity19CleanUpOldReferenceEPPS_, void, CEntity **ppAddress)
     DECL_THISCALL_TAIL(CleanUpOldReference, ppAddress)
 
+    // Helper functions
+    inline unsigned char GetInterior()
+    {
+        return m_nInterior;
+    }
+
     // Member values
     union
     {

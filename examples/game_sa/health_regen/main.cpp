@@ -1,11 +1,10 @@
 #include <mod/amlmod.h>
 
-#include <aml-psdk/game_sa/engine/Game.h>
+#include <aml-psdk/game_sa/Events.h>
 #include <aml-psdk/game_sa/entity/PlayerPed.h>
 #include <aml-psdk/game_sa/base/Timer.h>
-#include <aml-psdk/game_sa/Events.h>
 
-MYMOD(net.psdk.mymod.guid, AML PSDK Example: Health Regen, 1.0, RusJJ)
+MYMOD(net.rusjj.psdkexample.hpregen, AML PSDK Example: Health Regen, 1.0, RusJJ)
 
 ON_MOD_LOAD()
 {

@@ -2,7 +2,7 @@
 #define __AML_PSDK_SATEXT_H
 
 #include <aml-psdk/game_sa/plugin.h>
-#include <aml-psdk/game_sa/engine/GxtChar.h>
+#include <aml-psdk/gta_base/GxtChar.h>
 
 struct ChunkHeader
 {

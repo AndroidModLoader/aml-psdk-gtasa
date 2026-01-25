@@ -24,6 +24,7 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/engine/Sprite.h>
 #include <aml-psdk/game_sa/other/Stats.h>
 #include <aml-psdk/game_sa/engine/Text.h>
+#include <aml-psdk/game_sa/engine/Font.h>
 
 #include <aml-psdk/game_sa/Events.h>
 

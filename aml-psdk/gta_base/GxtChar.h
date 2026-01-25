@@ -1,5 +1,5 @@
-#ifndef __AML_PSDK_SAGXTCHAR_H
-#define __AML_PSDK_SAGXTCHAR_H
+#ifndef __AML_PSDK_GTAGXTCHAR_H
+#define __AML_PSDK_GTAGXTCHAR_H
 
 union GxtChar
 {
@@ -8,7 +8,7 @@ union GxtChar
 };
 
 inline unsigned short* AsUINT(GxtChar* self) { return (unsigned short*)self; }
-inline void AsciiToGXTChar(const char* src, GxtChar* dst)
+inline void AsciiToGxtChar(const char* src, GxtChar* dst)
 {
     int i = 0;
     while(src[i])
@@ -19,9 +19,9 @@ inline void AsciiToGXTChar(const char* src, GxtChar* dst)
     dst[i].s = 0;
     dst[i+1].s = 0;
 }
-inline void AsciiToGXTChar(const char* src, unsigned short* dst)
+inline void AsciiToGxtChar(const char* src, unsigned short* dst)
 {
-    AsciiToGXTChar(src, (GxtChar*)dst);
+    AsciiToGxtChar(src, (GxtChar*)dst);
 }
 
-#endif // __AML_PSDK_SAGXTCHAR_H
+#endif // __AML_PSDK_GTAGXTCHAR_H
