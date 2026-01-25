@@ -119,6 +119,9 @@ inline Type GetMainLibrarySymbol(const char* sym)
 #define DECL_VALUE_OBJECT_BASE(_type) \
         _type* operator->() { return &Get(); }
 
+#define DECL_VALUE_OBJECT_ARRAY_BASE(_type) \
+        _type& operator[](int i) { return Get()[i]; }
+
 // Values
 
 #define DECL_VALUE_PLT_I32(_name, _addr) \
@@ -241,6 +244,14 @@ inline Type GetMainLibrarySymbol(const char* sym)
     DECL_VALUE_HEAD(_type, _name) \
         DECL_VALUE_PLT_BASE(_type, _name, _addr) \
         DECL_VALUE_OBJECT_BASE(_type) \
+        DECL_VALUE_RETURN_BASE(_type&) \
+    DECL_VALUE_TAIL(_type, _name)
+
+#define DECL_OBJECT_ARRAY_PLT(_type, _name, _addr) \
+    DECL_VALUE_HEAD(_type, _name) \
+        DECL_VALUE_PLT_BASE(_type, _name, _addr) \
+        DECL_VALUE_OBJECT_BASE(_type) \
+        DECL_VALUE_OBJECT_ARRAY_BASE(_type) \
         DECL_VALUE_RETURN_BASE(_type&) \
     DECL_VALUE_TAIL(_type, _name)
 

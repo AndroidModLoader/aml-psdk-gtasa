@@ -22,6 +22,8 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/entity/Camera.h>
 #include <aml-psdk/game_sa/engine/Sprite2d.h>
 #include <aml-psdk/game_sa/engine/Sprite.h>
+#include <aml-psdk/game_sa/other/Stats.h>
+#include <aml-psdk/game_sa/engine/Text.h>
 
 #include <aml-psdk/game_sa/Events.h>
 
@@ -44,4 +46,6 @@ void Test()
     // GET_THISCALL_ADDR only works with declared funcs
     // HOOK(CCamera__Process, GetMainLibrarySymbol("_ZN7CCamera7ProcessEv") );
     HOOK(CCamera__Process, GET_THISCALL_ADDR(CCamera, Process) ); // <- this definitely looks better than above :p
+
+    TheText.Get("do we compile?");
 }
