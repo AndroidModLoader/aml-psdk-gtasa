@@ -181,6 +181,15 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_RETURN_BASE(int) \
     DECL_VALUE_TAIL(i8, _name)
 
+#define DECL_VALUE_PLT_U16(_name, _addr) \
+    DECL_VALUE_HEAD(u16, _name) \
+        DECL_VALUE_PLT_BASE(u16, _name, _addr) \
+        DECL_VALUE_NUMBER_BASE(u16) \
+        DECL_VALUE_BITOPS_BASE(u16) \
+        DECL_VALUE_RETURN_BASE(unsigned short) \
+        DECL_VALUE_RETURN_BASE(unsigned int) \
+    DECL_VALUE_TAIL(u16, _name)
+
 #define DECL_VALUE_PLT_I8_GLOBAL(_name, _addr) \
     DECL_VALUE_HEAD(i8, _name) \
         DECL_VALUE_PLT_BASE(i8, _name, _addr) \
@@ -248,12 +257,12 @@ inline Type GetMainLibrarySymbol(const char* sym)
     DECL_VALUE_TAIL(_type, _name)
 
 #define DECL_OBJECT_ARRAY_PLT(_type, _name, _addr) \
-    DECL_VALUE_HEAD(_type, _name) \
-        DECL_VALUE_PLT_BASE(_type, _name, _addr) \
-        DECL_VALUE_OBJECT_BASE(_type) \
+    DECL_VALUE_HEAD(_type*, _name) \
+        DECL_VALUE_PLT_BASE(_type*, _name, _addr) \
+        DECL_VALUE_OBJECT_BASE(_type*) \
         DECL_VALUE_OBJECT_ARRAY_BASE(_type) \
-        DECL_VALUE_RETURN_BASE(_type&) \
-    DECL_VALUE_TAIL(_type, _name)
+        DECL_VALUE_RETURN_BASE(_type*&) \
+    DECL_VALUE_TAIL(_type*, _name)
 
 #define DECL_OBJECT_PLT_GLOBAL(_type, _name, _addr) \
     DECL_VALUE_HEAD(_type, _name) \

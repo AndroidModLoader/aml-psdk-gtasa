@@ -7,6 +7,7 @@
 struct CEntity;
 struct CVehicle;
 struct CPed;
+struct CColSphere;
 
 DECL_CLASS(CCam)
     CCam(){}
