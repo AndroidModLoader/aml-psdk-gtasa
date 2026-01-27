@@ -247,6 +247,11 @@ DECL_CLASS(CRadar)
     {
         return ms_RadarTrace[(unsigned short)hndl];
     }
+    static bool ValidBlipHandle(u32 hndl)
+    {
+        tRadarTrace& blip = GetBlipFromHandle(hndl);
+        return (blip.m_nCounter == (unsigned short)(hndl >> 16) && blip.m_nBlipDisplay);
+    }
     
     // STATIC Values
     DECL_OBJECT_ARRAY_PLT(i16, MapLegendList, BYBIT(0x677394, 0x84C760));

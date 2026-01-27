@@ -60,7 +60,7 @@ ON_MOD_LOAD()
             CRadar::TransformRadarPointToScreenSpace(radarBottom, CVector2D(0.0f, -1.0f));
                 
             char text[16];
-            if (gpsDistance > 1000.0f)
+            if (gpsDistance >= 1000.0f)
                 sprintf(text, "%.2fkm", gpsDistance / 1000.0f);
             else
                 sprintf(text, "%dm", static_cast<int>(gpsDistance));
@@ -71,11 +71,9 @@ ON_MOD_LOAD()
     Events::gameProcessEvent += []()
     {
         if (gMobileMenu.m_nTargetBlipIndex
-            && CRadar::ms_RadarTrace[(unsigned short)(gMobileMenu.m_nTargetBlipIndex)].m_nCounter == (unsigned short)(gMobileMenu.m_nTargetBlipIndex >> 16)
-            && CRadar::ms_RadarTrace[(unsigned short)(gMobileMenu.m_nTargetBlipIndex)].m_nBlipDisplay
+            && CRadar::ValidBlipHandle(gMobileMenu.m_nTargetBlipIndex)
             && FindPlayerPed(0)
-            && DistanceBetweenPoints(CVector2D(FindPlayerCoors(0)), 
-                CVector2D(CRadar::ms_RadarTrace[(unsigned short)(gMobileMenu.m_nTargetBlipIndex)].m_vecPos)) < MAX_TARGET_DISTANCE)
+            && DistanceBetweenPoints2D(FindPlayerCoors(0), CRadar::GetBlipFromHandle(gMobileMenu.m_nTargetBlipIndex).m_vecPos) < MAX_TARGET_DISTANCE)
         {
             CRadar::ClearBlip(gMobileMenu.m_nTargetBlipIndex);
             gMobileMenu.m_nTargetBlipIndex = 0;
@@ -93,8 +91,7 @@ ON_MOD_LOAD()
             && playa->m_pVehicle->m_nVehicleSubClass != VEHICLE_HELI
             && playa->m_pVehicle->m_nVehicleSubClass != VEHICLE_BMX
             && gMobileMenu.m_nTargetBlipIndex
-            && CRadar::ms_RadarTrace[(unsigned short)(gMobileMenu.m_nTargetBlipIndex)].m_nCounter == (unsigned short)(gMobileMenu.m_nTargetBlipIndex >> 16)
-            && CRadar::ms_RadarTrace[(unsigned short)(gMobileMenu.m_nTargetBlipIndex)].m_nBlipDisplay)
+            && CRadar::ValidBlipHandle(gMobileMenu.m_nTargetBlipIndex))
         {
             CVector destPosn = CRadar::ms_RadarTrace[(unsigned short)(gMobileMenu.m_nTargetBlipIndex)].m_vecPos;
             destPosn.z = CWorld::FindGroundZForCoord(destPosn.x, destPosn.y);

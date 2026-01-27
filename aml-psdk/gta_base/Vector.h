@@ -329,7 +329,15 @@ inline float DistanceBetweenPoints(CVector const& v1, CVector const& v2)
 {
     return (v1 - v2).Magnitude();
 }
+inline float DistanceBetweenPoints2D(CVector const& v1, CVector const& v2)
+{
+    return (v1 - v2).Magnitude2D();
+}
 inline float DistanceBetweenPoints(CVector2D const& v1, CVector2D const& v2)
+{
+    return (v1 - v2).Magnitude2D();
+}
+inline float DistanceBetweenPoints2D(CVector2D const& v1, CVector2D const& v2)
 {
     return (v1 - v2).Magnitude2D();
 }
