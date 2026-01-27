@@ -10,8 +10,17 @@ struct CCopPed;
 struct RpAtomic;
 struct CEntity;
 struct CPed;
+struct CVehicle;
 
 DECL_CLASS(CPlayerData)
+    // Construct/Deconstruct functions
+    DECL_CTORCALL(CPlayerData, _ZN14CPlayerPedDataC2Ev);
+    DECL_DTORCALL(CPlayerData, _ZN14CPlayerPedDataD2Ev);
+    // Member functions
+    DECL_THISCALL_SIMPLE(SetInitialState, _ZN14CPlayerPedData15SetInitialStateEv, void);
+    DECL_THISCALL_SIMPLE(AllocateData, _ZN14CPlayerPedData12AllocateDataEv, void);
+    DECL_THISCALL_SIMPLE(DeAllocateData, _ZN14CPlayerPedData14DeAllocateDataEv, void);
+    
     // Member values
     CWanted * m_pWanted;
     CPedClothesDesc *m_pPedClothesDesc;
@@ -25,7 +34,7 @@ DECL_CLASS(CPlayerData)
     unsigned int m_nStandStillTimer;
     unsigned int m_nHitAnimDelayTimer;
     float m_fAttackButtonCounter;
-    void *m_pDangerCar;
+    CVehicle *m_pDangerCar;
     unsigned int m_bStoppedMoving : 1;
     unsigned int m_bAdrenaline : 1;
     unsigned int m_bHaveTargetSelected : 1;             // Needed to work out whether we lost target this frame
