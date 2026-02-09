@@ -28,6 +28,7 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/engine/PathFind.h>
 #include <aml-psdk/gta_base/DrawVertices.h>
 #include <aml-psdk/game_sa/engine/MobileMenu.h>
+#include <aml-psdk/game_sa/engine/VehicleModelInfo.h>
 
 #include <aml-psdk/game_sa/Events.h>
 
