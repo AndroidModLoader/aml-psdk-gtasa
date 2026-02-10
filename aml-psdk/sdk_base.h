@@ -280,6 +280,14 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_RETURN_BASE(_type*&) \
     DECL_VALUE_TAIL(_type*, _name)
 
+#define DECL_OBJECT_ARRAY_PLT_GLOBAL(_type, _name, _addr) \
+    DECL_VALUE_HEAD(_type*, _name) \
+        DECL_VALUE_PLTPTR_BASE(_type*, _name, _addr) \
+        DECL_VALUE_OBJECT_BASE(_type*) \
+        DECL_VALUE_OBJECT_ARRAY_BASE(_type) \
+        DECL_VALUE_RETURN_BASE(_type*&) \
+    DECL_VALUE_TAIL_GLOBAL(_type*, _name)
+
 #define DECL_OBJECT_PLT_GLOBAL(_type, _name, _addr) \
     DECL_VALUE_HEAD(_type, _name) \
         DECL_VALUE_PLT_BASE(_type, _name, _addr) \
