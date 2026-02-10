@@ -3,6 +3,8 @@
 
 #include "Vehicle.h"
 
+struct FxSystem_c;
+
 enum eDamageState
 {
     DAMSTATE_OK = 0,
@@ -365,15 +367,176 @@ DECL_CLASS_BASED(CQuadBike, CAutomobile)
     // Member values
     void          *m_pHandling;
     CRideAnimData  m_rideAnimData;
-    float m_fLeftArmSwing;
-    float m_fForkYOff;
-    float m_fForkZOff;
-    float m_fSteerAngleTan;
+    float          m_fLeftArmSwing;
+    float          m_fForkYOff;
+    float          m_fForkZOff;
+    float          m_fSteerAngleTan;
     union
     {
-        unsigned char  m_nQuadFlags;
+        unsigned char m_nQuadFlags;
         unsigned char m_bWheelieForCamera : 1;
     };
 DECL_CLASS_END()
+
+
+
+enum eHeliNodes
+{
+    HELI_NODE_NONE = 0,
+    HELI_CHASSIS = 1,
+    HELI_WHEEL_RF = 2,
+    HELI_WHEEL_RM = 3,
+    HELI_WHEEL_RB = 4,
+    HELI_WHEEL_LF = 5,
+    HELI_WHEEL_LM = 6,
+    HELI_WHEEL_LB = 7,
+    HELI_DOOR_RF = 8,
+    HELI_DOOR_RR = 9,
+    HELI_DOOR_LF = 10,
+    HELI_DOOR_LR = 11,
+    HELI_STATIC_ROTOR = 12,
+    HELI_MOVING_ROTOR = 13,
+    HELI_STATIC_ROTOR2 = 14,
+    HELI_MOVING_ROTOR2 = 15,
+    HELI_RUDDER = 16,
+    HELI_ELEVATORS = 17,
+    HELI_MISC_A = 18,
+    HELI_MISC_B = 19,
+    HELI_MISC_C = 20,
+    HELI_MISC_D = 21,
+    HELI_NUM_NODES
+};
+
+struct tHeliLight
+{
+    CVector m_vecOrigin;
+    CVector m_vecTarget;
+    float m_fTargetRadius;
+    float m_fPower;
+    int m_nCoronaIndex;
+    bool m_bClipIfColliding;
+    bool m_bDrawShadow;
+    CVector m_vecEllipseCentre;
+    CVector m_vecEllipseForward;
+    CVector m_vecEllipseSide;
+};
+
+DECL_CLASS_BASED(CHeli, CAutomobile)
+    // Construct/Deconstruct functions
+    CHeli(){}
+    DECL_CTORCALL_ARG_HEAD(CHeli, _ZN5CHeliC2Eih, int modelIdx, u8 createdBy)
+    DECL_CTORCALL_ARG_TAIL(modelIdx, createdBy)
+    DECL_DTORCALL(CHeli, _ZN5CHeliD2Ev);
+
+    // Member values
+    union
+    {
+        char            m_nHeliFlags;
+        struct
+        {
+            char        m_bStopFlyingForAWhileFlag : 1;
+            char        m_bUseSearchLightOnTarget : 1;
+            char        m_bWarnTarger : 1;
+        };
+    };
+    float               m_fLeftRightSkid;
+    float               m_fSteeringUpDown;
+    float               m_fSteeringLeftRight;
+    float               m_fAccelerationBreakStatus;
+    float               m_fEngineSpeed;
+    float               m_fRotorZ;
+    float               m_fSecondRotorZ;
+    float               m_fMaxAltitude;
+    float               m_fDesiredHeight;
+    float               m_fMinAltitude;
+    float               m_fFlightDirection;
+    bool                m_bStopFlyingForAWhile;
+    char                m_nNumSwatOccupants;
+    char                m_anSwatIDs[4];
+    float               m_afOldSearchLightX[6];
+    float               m_afOldSearchLightY[6];
+    u32                 m_nLastSearchLightSample;
+    CVector             m_vecSearchLightTarget;
+    float               m_fSearchLightIntensity;
+    u32                 m_nLastTimeSearchLightWasTooFarAwayToShoot;
+    u32                 m_nNextTalkTimer;
+    FxSystem_c        **m_ppGunflashFx;
+    char                m_nFiringMultiplier;
+    bool                m_bSearchLightEnabled;
+    float               m_fCrashAndBurnTurnSpeed;
+DECL_CLASS_END()
+CHECKSIZE(CHeli, 0xA2C, 0xC60);
+
+
+
+enum ePlaneNodes
+{
+    PLANE_NODE_NONE = 0,
+    PLANE_CHASSIS = 1,
+    PLANE_WHEEL_RF = 2,
+    PLANE_WHEEL_RM = 3,
+    PLANE_WHEEL_RB = 4,
+    PLANE_WHEEL_LF = 5,
+    PLANE_WHEEL_LM = 6,
+    PLANE_WHEEL_LB = 7,
+    PLANE_DOOR_RF = 8,
+    PLANE_DOOR_RR = 9,
+    PLANE_DOOR_LF = 10,
+    PLANE_DOOR_LR = 11,
+    PLANE_STATIC_PROP = 12,
+    PLANE_MOVING_PROP = 13,
+    PLANE_STATIC_PROP2 = 14,
+    PLANE_MOVING_PROP2 = 15,
+    PLANE_RUDDER = 16,
+    PLANE_ELEVATOR_L = 17,
+    PLANE_ELEVATOR_R = 18,
+    PLANE_AILERON_L = 19,
+    PLANE_AILERON_R = 20,
+    PLANE_GEAR_L = 21,
+    PLANE_GEAR_R = 22,
+    PLANE_MISC_A = 23,
+    PLANE_MISC_B = 24,
+    PLANE_NUM_NODES
+};
+
+DECL_CLASS_BASED(CPlane, CAutomobile)
+    // Construct/Deconstruct functions
+    CPlane(){}
+    DECL_CTORCALL_ARG_HEAD(CPlane, _ZN6CPlaneC2Eih, int modelIdx, u8 createdBy)
+    DECL_CTORCALL_ARG_TAIL(modelIdx, createdBy)
+    DECL_DTORCALL(CPlane, _ZN6CPlaneD2Ev);
+
+    // Member values
+    float           m_fYawControl;
+    float           m_fPitchControl;
+    float           m_fRollControl;
+    float           m_fThrottleControl;
+    float           m_fScriptThrottleControl;
+    float           m_fPreviousRoll;
+    uint32_t        m_nStallCounter;
+    float           m_fTakeOffDirection;
+    float           m_fLowestFlightHeight;
+    float           m_fDesiredHeight;
+    float           m_fMinHeightAboveTerrain;
+    float           m_fFlightDirection;
+    float           m_fFlightDirectionAvoidingTerrain;
+    float           m_fOldTilt;
+    uint32_t        m_nStartedFlyingTime;
+    float           m_fEngineSpeed;
+    float           m_fPropellerAngle;
+    float           m_fLandingGearStatus;
+    uint32_t        m_nDamageControlWaveCounter;
+    FxSystem_c    **m_pGunParticles;
+    uint8_t         m_nFiringMultiplier;
+    uint32_t        m_FireMissilePressedTime;
+    CEntity        *m_pLastMissileTarget;
+    uint32_t        m_nLastHSMissileLOSTime : 31;
+    uint32_t        m_bLastHSMissileLOS : 1;
+    FxSystem_c     *m_apJettrusParticles[4];
+    FxSystem_c     *m_pSmokeParticle;
+    int32_t         m_nSmokeTimer;
+    bool            m_bSmokeEjectorEnabled;
+DECL_CLASS_END()
+CHECKSIZE(CPlane, 0xA18, 0xC68);
 
 #endif // __AML_PSDK_SAAUTOMOBILE_H

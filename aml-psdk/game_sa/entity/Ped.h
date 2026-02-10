@@ -44,6 +44,20 @@ struct LimbMovementInfo
     float pitchD;
 };
 
+enum eCopType : unsigned int
+{
+    COP_TYPE_CITYCOP = 0,
+    COP_TYPE_LAPDM1,
+    COP_TYPE_SWAT1,
+    COP_TYPE_SWAT2,
+    COP_TYPE_FBI,
+    COP_TYPE_ARMY,
+    COP_TYPE_MIAMIVICE,
+    COP_TYPE_CSHER
+};
+
+
+
 DECL_CLASS(CPedIK)
     CPed *m_pPed;
     LimbOrientation m_TorsoOrien;
@@ -403,6 +417,39 @@ DECL_CLASS_BASED(CPed, CPhysical)
     uint32_t            m_nLastTalkSfx;
 DECL_CLASS_END()
 CHECKSIZE(CPed, 0x7A4, 0x988);
+
+
+
+DECL_CLASS_BASED(CCopPed, CPed)
+    // Construct/Deconstruct functions
+    CCopPed(){}
+    DECL_CTORCALL_ARG_HEAD(CCopPed, _ZN7CCopPedC2E8eCopType, eCopType CopType)
+    DECL_CTORCALL_ARG_TAIL(CopType)
+    DECL_DTORCALL(CCopPed, _ZN7CCopPedD2Ev)
+
+    // Member functions
+    DECL_THISCALL_SIMPLE(ClearCriminalsToKill, _ZN7CCopPed20ClearCriminalsToKillEv, void);
+
+    DECL_THISCALL_HEAD(SetPartner, _ZN7CCopPed10SetPartnerEPS_, void, CCopPed *pPed)
+    DECL_THISCALL_TAIL(SetPartner, pPed)
+
+    DECL_THISCALL_HEAD(AddCriminalToKill, _ZN7CCopPed17AddCriminalToKillEP4CPed, i32, CPed *pCriminal)
+    DECL_THISCALL_TAIL(AddCriminalToKill, pCriminal)
+
+    DECL_THISCALL_HEAD(RemoveCriminalToKill, _ZN7CCopPed20RemoveCriminalToKillEP4CPedi, void, CPed *pCriminal, i32 i)
+    DECL_THISCALL_TAIL(RemoveCriminalToKill, pCriminal, i)
+
+    // Member values
+    bool           m_bRoadBlockCop;
+    bool           m_bRemoveIfNonVisible;
+    eCopType       m_copType;
+    int            m_nStuckCounter;
+    CCopPed       *m_pCopPartner;
+    CPed          *m_apCriminalsToKill[5];
+    bool           m_bIAmDriver;
+DECL_CLASS_END()
+
+
 
 DECL_FASTCALL_SIMPLE_GLO(IsPedPointerValid, _Z17IsPedPointerValidP4CPed, bool, CPed* pPed);
 DECL_FASTCALL_SIMPLE_GLO(IsPedPointerValid_NotInWorld, _Z28IsPedPointerValid_NotInWorldP4CPed, bool, CPed* pPed);

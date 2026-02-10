@@ -54,11 +54,13 @@ typedef uintptr_t uptr;
 
 #ifdef AML64
     #define CHECKSIZE(_cls, _s32, _s64) static_assert(sizeof(_cls)==_s64, "Validating size of " #_cls " is failed! " #_cls "'s size is not " #_s64)
+    #define SELBYBIT(__32val, __64val) __64val
     #define B64MACRO(...) __VA_ARGS__
     #define B32MACRO(...)
     #define ALIGN_8_4 8
 #else
     #define CHECKSIZE(_cls, _s32, _s64) static_assert(sizeof(_cls)==_s32, "Validating size of " #_cls " is failed! " #_cls "'s size is not " #_s32)
+    #define SELBYBIT(__32val, __64val) __32val
     #define B32MACRO(...) __VA_ARGS__
     #define B64MACRO(...)
     #define ALIGN_8_4 4
