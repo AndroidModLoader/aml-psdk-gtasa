@@ -188,6 +188,15 @@ inline Type GetMainLibrarySymbol(const char* sym)
         DECL_VALUE_RETURN_BASE(int) \
     DECL_VALUE_TAIL(i8, _name)
 
+#define DECL_VALUE_PLT_I16(_name, _addr) \
+    DECL_VALUE_HEAD(i16, _name) \
+        DECL_VALUE_PLT_BASE(i16, _name, _addr) \
+        DECL_VALUE_NUMBER_BASE(i16) \
+        DECL_VALUE_BITOPS_BASE(i16) \
+        DECL_VALUE_RETURN_BASE(short) \
+        DECL_VALUE_RETURN_BASE(int) \
+    DECL_VALUE_TAIL(i16, _name)
+
 #define DECL_VALUE_PLT_U16(_name, _addr) \
     DECL_VALUE_HEAD(u16, _name) \
         DECL_VALUE_PLT_BASE(u16, _name, _addr) \

@@ -368,4 +368,20 @@ DECL_CLASS_BASED(CAEVehicleAudioEntity, CAEAudioEntity)
 DECL_CLASS_END()
 CHECKSIZE(CAEVehicleAudioEntity, 0x24C, 0x310);
 
+
+
+DECL_CLASS_BASED(CAEWeatherAudioEntity, CAEAudioEntity)
+    // STATIC functions
+    DECL_FASTCALL_SIMPLE(StaticReset, _ZN21CAEWeatherAudioEntity11StaticResetEv, void);
+
+    // Member functions
+    DECL_THISCALL_SIMPLE(Service, _ZN21CAEWeatherAudioEntity7ServiceEv, void);
+
+    DECL_THISCALL_HEAD(AddAudioEvent, _ZN21CAEWeatherAudioEntity13AddAudioEventEi, void, int AudioEvent)
+    DECL_THISCALL_TAIL(AddAudioEvent, AudioEvent)
+
+    // Memebr values
+    i8 m_nLastThunderFrequencyIndex;
+DECL_CLASS_END()
+
 #endif // __AML_PSDK_SAAEAUDIOENTITY_H
