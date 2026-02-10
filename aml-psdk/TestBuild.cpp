@@ -33,6 +33,9 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/other/Clock.h>
 #include <aml-psdk/game_sa/other/Pools.h>
 #include <aml-psdk/game_sa/Events.h>
+#include <aml-psdk/game_sa/extdata/PedExtender.h>
+#include <aml-psdk/game_sa/extdata/ObjectExtender.h>
+#include <aml-psdk/game_sa/extdata/VehicleExtender.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
