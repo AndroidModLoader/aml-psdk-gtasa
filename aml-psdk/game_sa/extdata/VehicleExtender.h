@@ -12,7 +12,7 @@ struct VehicleExtendersHandler : public ExtendersHandler<CVehicle>
         data.extenders.push_back(extender);
         if (!data.injected)
         {
-            Events::initPoolsEvent.after += Allocate;
+            Events::initGameStage1Event.after += Allocate;
             Events::vehicleCtorEvent.before += Constructor;
             Events::vehicleDtorEvent.after += Destructor;
             data.injected = true;

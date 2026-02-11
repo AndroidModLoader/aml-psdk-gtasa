@@ -12,7 +12,7 @@ struct ObjectExtendersHandler : public ExtendersHandler<CObject>
         data.extenders.push_back(extender);
         if (!data.injected)
         {
-            Events::initPoolsEvent.after += Allocate;
+            Events::initGameStage1Event.after += Allocate;
             Events::objectCtorEvent.before += Constructor;
             Events::objectDtorEvent.after += Destructor;
             data.injected = true;

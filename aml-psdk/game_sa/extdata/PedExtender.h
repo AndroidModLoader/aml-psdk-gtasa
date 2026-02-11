@@ -12,7 +12,7 @@ struct PedExtendersHandler : public ExtendersHandler<CPed>
         data.extenders.push_back(extender);
         if (!data.injected)
         {
-            Events::initPoolsEvent.after += Allocate;
+            Events::initGameStage1Event.after += Allocate;
             Events::pedCtorEvent.before += Constructor;
             Events::pedDtorEvent.after += Destructor;
             data.injected = true;
