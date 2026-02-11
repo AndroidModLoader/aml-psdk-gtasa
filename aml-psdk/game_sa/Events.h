@@ -48,7 +48,9 @@ struct Events
     DECL_EVENT_SYM_ARG0_PICK0(bool, attachRwPluginsEvent, _Z12PluginAttachv);
 
     // Additional events (aml psdk)
-    DECL_EVENT_PLT_ARG1_PICK1(void, processCamera, BYBIT(0x6717BC, 0x8429D8), CCamera*, camera);
+    DECL_EVENT_PLT_ARG1_PICK1(void, processCameraEvent, BYBIT(0x6717BC, 0x8429D8), CCamera*, camera);
+    DECL_EVENT_PLT_ARG0_PICK0(void, initWidgetsEvent, BYBIT(0x6734E4, 0x8459D8));
+    DECL_EVENT_PLT_ARG0_PICK0(void, updateWidgetsEvent, BYBIT(0x6746E4, 0x847780));
 };
 
 #endif // __AML_PSDK_SACALLEVENTS_H

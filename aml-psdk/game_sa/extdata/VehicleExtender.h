@@ -32,7 +32,7 @@ struct VehicleExtendedData : public ExtenderInterface<CVehicle>
         blocks = new T*[numBlocks];
         for (unsigned int i = 0; i < numBlocks; i++)
         {
-            blocks[i] = 0;
+            blocks[i] = NULL;
         }
     }
     void OnConstructor(CVehicle *vehicle)
@@ -42,12 +42,12 @@ struct VehicleExtendedData : public ExtenderInterface<CVehicle>
     void OnDestructor(CVehicle *vehicle)
     {
         delete blocks[CPools::ms_pVehiclePool->GetIndex(vehicle)];
-        blocks[CPools::ms_pVehiclePool->GetIndex(vehicle)] = 0;
+        blocks[CPools::ms_pVehiclePool->GetIndex(vehicle)] = NULL;
     }
     
     VehicleExtendedData()
     {
-        blocks = 0;
+        blocks = NULL;
         VehicleExtendersHandler::Add(this);
     }
     ~VehicleExtendedData()

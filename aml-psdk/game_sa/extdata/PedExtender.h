@@ -32,7 +32,7 @@ struct PedExtendedData : public ExtenderInterface<CPed>
         blocks = new T*[numBlocks];
         for (unsigned int i = 0; i < numBlocks; i++)
         {
-            blocks[i] = 0;
+            blocks[i] = NULL;
         }
     }
     void OnConstructor(CPed *ped)
@@ -42,12 +42,12 @@ struct PedExtendedData : public ExtenderInterface<CPed>
     void OnDestructor(CPed *ped)
     {
         delete blocks[CPools::ms_pPedPool->GetIndex(ped)];
-        blocks[CPools::ms_pPedPool->GetIndex(ped)] = 0;
+        blocks[CPools::ms_pPedPool->GetIndex(ped)] = NULL;
     }
     
     PedExtendedData()
     {
-        blocks = 0;
+        blocks = NULL;
         PedExtendersHandler::Add(this);
     }
     ~PedExtendedData()

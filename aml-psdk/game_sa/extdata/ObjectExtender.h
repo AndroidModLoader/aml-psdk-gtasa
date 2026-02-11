@@ -32,7 +32,7 @@ struct ObjectExtendedData : public ExtenderInterface<CObject>
         blocks = new T*[numBlocks];
         for (unsigned int i = 0; i < numBlocks; i++)
         {
-            blocks[i] = 0;
+            blocks[i] = NULL;
         }
     }
     void OnConstructor(CObject *object)
@@ -42,12 +42,12 @@ struct ObjectExtendedData : public ExtenderInterface<CObject>
     void OnDestructor(CObject *object)
     {
         delete blocks[CPools::ms_pObjectPool->GetIndex(object)];
-        blocks[CPools::ms_pObjectPool->GetIndex(object)] = 0;
+        blocks[CPools::ms_pObjectPool->GetIndex(object)] = NULL;
     }
     
     ObjectExtendedData()
     {
-        blocks = 0;
+        blocks = NULL;
         ObjectExtendersHandler::Add(this);
     }
     ~ObjectExtendedData()
