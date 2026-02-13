@@ -16,6 +16,7 @@ DECL_CLASS(CPlayerData)
     // Construct/Deconstruct functions
     DECL_CTORCALL(CPlayerData, _ZN14CPlayerPedDataC2Ev);
     DECL_DTORCALL(CPlayerData, _ZN14CPlayerPedDataD2Ev);
+    
     // Member functions
     DECL_THISCALL_SIMPLE(SetInitialState, _ZN14CPlayerPedData15SetInitialStateEv, void);
     DECL_THISCALL_SIMPLE(AllocateData, _ZN14CPlayerPedData12AllocateDataEv, void);
