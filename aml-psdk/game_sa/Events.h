@@ -34,7 +34,7 @@ struct Events
     DECL_EVENT_SYM_ARG1_PICK1(void, pedRenderEvent, _ZN4CPed6RenderEv, CPed*, ped);
     DECL_EVENT_SYM_ARG1_PICK1(void, objectRenderEvent, _ZN7CObject6RenderEv, CObject*, object);
     DECL_EVENT_SYM_ARG2_PICK2(void, vehicleSetModelEvent, _ZN8CVehicle13SetModelIndexEj, CVehicle*, vehicle, int, model);
-    DECL_EVENT_SYM_ARG2_PICK2(void, pedSetModelEvent, _ZN4CPed13SetModelIndexEj, CVehicle*, vehicle, int, model);
+    DECL_EVENT_SYM_ARG2_PICK2(void, pedSetModelEvent, _ZN4CPed13SetModelIndexEj, CPed*, ped, int, model);
     // d3dResetEvent // ogl analogue
     // d3dLostEvent // do we need this?
     DECL_EVENT_SYM_ARG0_PICK0(void, gameProcessEvent, _ZN5CGame7ProcessEv);

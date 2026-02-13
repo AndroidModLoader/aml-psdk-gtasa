@@ -151,4 +151,137 @@ template <class T> struct OSArray
 #define TDBArray OSArray
 #define SArray OSArray
 
+struct ListItem_c
+{
+    ListItem_c() { next = NULL; prev = NULL; }
+    ListItem_c *next;
+    ListItem_c *prev;
+};
+
+struct List_c
+{
+    List_c() { last = NULL; first = NULL; count = 0; }
+    ListItem_c *first;
+    ListItem_c *last;
+    unsigned int count;
+
+    inline void AddItem(ListItem_c *pItem)
+    {
+        ListItem_c* oldHead = first;
+
+        first = pItem;
+        pItem->prev = NULL;
+        pItem->next = first;
+        if(oldHead)
+        {
+            oldHead->prev = pItem;
+        }
+        else
+        {
+            last = pItem;
+        }
+        ++count;
+    }
+    inline void RemoveItem(ListItem_c *pItem)
+    {
+        if(pItem->next)
+        {
+            pItem->next->prev = pItem->next;
+        }
+        else
+        {
+            last = pItem->prev;
+        }
+
+        if (pItem->prev)
+        {
+            pItem->prev->next = pItem->next;
+        }
+        else
+        {
+            first = pItem->next;
+        }
+        --count;
+    }
+    inline ListItem_c *GetHead(void) { return first; }
+    inline ListItem_c *RemoveHead(void)
+    {
+        if(first)
+        {
+            if(first == last)
+            {
+                last = NULL;
+                first->prev = NULL;
+            }
+            else
+            {
+                first = first->next;
+                if(first) first->prev = NULL;
+            }
+            --count;
+        }
+        return first;
+    }
+    inline ListItem_c *GetNext(ListItem_c *pItem) { return pItem->next; }
+    inline ListItem_c *GetPrev(ListItem_c *pItem) { return pItem->prev; }
+    inline ListItem_c *GetItemOffset(bool bFromHead, int iOffset)
+    {
+        ListItem_c* ret;
+        if(bFromHead)
+        {
+            ret = first;
+            if(iOffset > 0)
+            {
+                for(int i = 0; i < iOffset; ++i)
+                {
+                    if(!ret) break;
+                    ret = ret->next;
+                }
+            }
+        }
+        else
+        {
+            ret = last;
+            if(iOffset > 0)
+            {
+                for(int i = 0; i < iOffset; ++i)
+                {
+                    if(!ret) break;
+                    ret = ret->prev;
+                }
+            }
+        }
+        return ret;
+    }
+};
+
+template <typename ItemType>
+struct TList_c : public List_c
+{
+    inline ItemType *GetHead(void)
+    {
+        return (ItemType*)(List_c::GetHead());
+    }
+
+    inline ItemType *RemoveHead(void)
+    {
+        return (ItemType*)(List_c::RemoveHead());
+    }
+
+    inline ItemType *GetNext(ItemType * pItem)
+    {
+        return (ItemType*)(List_c::GetNext(pItem));
+    }
+
+    inline ItemType *GetPrev(ItemType * pItem)
+    {
+        return (ItemType*)(List_c::GetPrev(pItem));
+    }
+
+    inline ItemType *GetItemOffset(bool bFromHead, int iOffset)
+    {
+        return (ItemType*)(List_c::GetItemOffset(bFromHead, iOffset));
+    }
+};
+
 #endif
