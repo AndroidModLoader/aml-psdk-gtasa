@@ -53,7 +53,7 @@
 
 #define DECL_EVENT_SYM_ARG0_PICK0(_ret, _name, _sym) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(); \
+        typedef void (EventType)(); \
         DECL_EVENT_SYM(_ret, _sym) \
         inline void CallBefore() { \
             for(auto fn : before.m_list) fn(); \
@@ -80,7 +80,7 @@
 
 #define DECL_EVENT_PLT_ARG0_PICK0(_ret, _name, _addr) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(); \
+        typedef void (EventType)(); \
         DECL_EVENT_PLT(_ret, _addr) \
         inline void CallBefore() { \
             for(auto fn : before.m_list) fn(); \
@@ -107,7 +107,7 @@
 
 #define DECL_EVENT_SYM_ARG1_PICK0(_ret, _name, _sym, _t1, _v1) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(); \
+        typedef void (EventType)(); \
         DECL_EVENT_SYM(_ret, _sym, _t1 _v1) \
         inline void CallBefore() { \
             for(auto fn : before.m_list) fn(); \
@@ -134,7 +134,7 @@
 
 #define DECL_EVENT_PLT_ARG1_PICK0(_ret, _name, _addr, _t1, _v1) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(); \
+        typedef void (EventType)(); \
         DECL_EVENT_PLT(_ret, _addr, _t1 _v1) \
         inline void CallBefore() { \
             for(auto fn : before.m_list) fn(); \
@@ -161,7 +161,7 @@
 
 #define DECL_EVENT_PLT_ARG1_PICK1(_ret, _name, _addr, _t1, _v1) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(_t1 _v1); \
+        typedef void (EventType)(_t1 _v1); \
         DECL_EVENT_PLT(_ret, _addr, _t1 _v1) \
         inline void CallBefore(_t1 _v1) { \
             for(auto fn : before.m_list) fn(_v1); \
@@ -188,7 +188,7 @@
 
 #define DECL_EVENT_SYM_ARG1_PICK1(_ret, _name, _sym, _t1, _v1) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(_t1 _v1); \
+        typedef void (EventType)(_t1 _v1); \
         DECL_EVENT_SYM(_ret, _sym, _t1 _v1) \
         inline void CallBefore(_t1 _v1) { \
             for(auto fn : before.m_list) fn(_v1); \
@@ -215,7 +215,7 @@
 
 #define DECL_EVENT_SYM_ARG2_PICK1(_ret, _name, _sym, _t1, _v1, _t2, _v2) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(_t1 _v1); \
+        typedef void (EventType)(_t1 _v1); \
         DECL_EVENT_SYM(_ret, _sym, _t1 _v1, _t2 _v2) \
         inline void CallBefore(_t1 _v1) { \
             for(auto fn : before.m_list) fn(_v1); \
@@ -242,7 +242,7 @@
 
 #define DECL_EVENT_SYM_ARG2_PICK2(_ret, _name, _sym, _t1, _v1, _t2, _v2) \
     DECL_EVENT_BASE(_name) \
-        typedef _ret (EventType)(_t1 _v1, _t2 _v2); \
+        typedef void (EventType)(_t1 _v1, _t2 _v2); \
         DECL_EVENT_SYM(_ret, _sym, _t1 _v1, _t2 _v2) \
         inline void CallBefore(_t1 _v1, _t2 _v2) { \
             for(auto fn : before.m_list) fn(_v1, _v2); \
