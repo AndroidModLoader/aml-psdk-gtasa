@@ -18,6 +18,16 @@ struct RwObject;
 struct RwFrame;
 struct RpMaterial;
 struct RpAtomic;
+struct CAutomobile;
+struct CMonsterTruck;
+struct CQuadBike;
+struct CHeli;
+struct CPlane;
+struct CBoat;
+struct CTrain;
+struct CBike;
+struct CBmx;
+struct CTrailer;
 
 enum eCarWeapon
 {
@@ -262,6 +272,42 @@ DECL_CLASS_BASED(CVehicle, CPhysical)
     virtual bool ProcessAI(unsigned int &);
     
     // Member functions
+
+    // Helper functions
+    inline bool IsVehicleTypeValid()     const { return m_nVehicleClass != -1; }
+    inline bool IsAutomobile()           const { return m_nVehicleClass == VEHICLE_AUTOMOBILE; }
+    inline bool IsMonsterTruck()         const { return m_nVehicleClass == VEHICLE_MTRUCK; }
+    inline bool IsQuad()                 const { return m_nVehicleClass == VEHICLE_QUAD; }
+    inline bool IsHeli()                 const { return m_nVehicleClass == VEHICLE_HELI; }
+    inline bool IsPlane()                const { return m_nVehicleClass == VEHICLE_PLANE; }
+    inline bool IsBoat()                 const { return m_nVehicleClass == VEHICLE_BOAT; }
+    inline bool IsTrain()                const { return m_nVehicleClass == VEHICLE_TRAIN; }
+    inline bool IsFakeAircraft()         const { return m_nVehicleClass == VEHICLE_FHELI || m_nVehicleClass == VEHICLE_FPLANE; }
+    inline bool IsBike()                 const { return m_nVehicleClass == VEHICLE_BIKE; }
+    inline bool IsBMX()                  const { return m_nVehicleClass == VEHICLE_BMX; }
+    inline bool IsTrailer()              const { return m_nVehicleClass == VEHICLE_TRAILER; }
+    inline bool IsSubVehicleTypeValid()  const { return m_nVehicleSubClass != -1; }
+    inline bool IsSubAutomobile()        const { return m_nVehicleSubClass == VEHICLE_AUTOMOBILE; }
+    inline bool IsSubMonsterTruck()      const { return m_nVehicleSubClass == VEHICLE_MTRUCK; }
+    inline bool IsSubQuad()              const { return m_nVehicleSubClass == VEHICLE_QUAD; }
+    inline bool IsSubHeli()              const { return m_nVehicleSubClass == VEHICLE_HELI; }
+    inline bool IsSubPlane()             const { return m_nVehicleSubClass == VEHICLE_PLANE; }
+    inline bool IsSubBoat()              const { return m_nVehicleSubClass == VEHICLE_BOAT; }
+    inline bool IsSubTrain()             const { return m_nVehicleSubClass == VEHICLE_TRAIN; }
+    inline bool IsSubFakeAircraft()      const { return m_nVehicleSubClass == VEHICLE_FHELI || m_nVehicleSubClass == VEHICLE_FPLANE; }
+    inline bool IsSubBike()              const { return m_nVehicleSubClass == VEHICLE_BIKE; }
+    inline bool IsSubBMX()               const { return m_nVehicleSubClass == VEHICLE_BMX; }
+    inline bool IsSubTrailer()           const { return m_nVehicleSubClass == VEHICLE_TRAILER; }
+    inline CAutomobile* AsAutomobile()         { return (CAutomobile*)this; }
+    inline CMonsterTruck* AsMonsterTruck()     { return (CMonsterTruck*)this; }
+    inline CQuadBike* AsQuadBike()             { return (CQuadBike*)this; }
+    inline CHeli* AsHeli()                     { return (CHeli*)this; }
+    inline CPlane* AsPlane()                   { return (CPlane*)this; }
+    inline CBoat* AsBoat()                     { return (CBoat*)this; }
+    inline CTrain* AsTrain()                   { return (CTrain*)this; }
+    inline CBike* AsBike()                     { return (CBike*)this; }
+    inline CBmx* AsBmx()                       { return (CBmx*)this; }
+    inline CTrailer* AsTrailer()               { return (CTrailer*)this; }
     
     // Member values
     CAEVehicleAudioEntity m_vehicleAudio;

@@ -11,6 +11,10 @@ struct RpClump;
 struct RpAtomic;
 struct CPhysical;
 struct CReference;
+struct CPed;
+struct CBuilding;
+struct CDummy;
+struct CVehicle;
 struct CObject;
 
 enum eEntityType : u8
@@ -139,10 +143,17 @@ DECL_CLASS_BASED(CEntity, CPlaceable)
     DECL_THISCALL_TAIL(CleanUpOldReference, ppAddress)
 
     // Helper functions
-    inline unsigned char GetInterior()
-    {
-        return m_nInterior;
-    }
+    inline unsigned char GetInterior() { return m_nInterior; }
+    inline bool IsVehicle() const { return m_nType == ENTITY_TYPE_VEHICLE; }
+    inline bool IsPed() const { return m_nType == ENTITY_TYPE_PED; }
+    inline bool IsBuilding() const { return m_nType == ENTITY_TYPE_BUILDING; }
+    inline bool IsObject() const { return m_nType == ENTITY_TYPE_OBJECT; }
+    inline bool IsDummy() const { return m_nType == ENTITY_TYPE_DUMMY; }
+    inline CVehicle* AsVehicle() { return (CVehicle*)this; }
+    inline CPed* AsPed() { return (CPed*)this; }
+    inline CBuilding* AsBuilding() { return (CBuilding*)this; }
+    inline CObject* AsObject() { return (CObject*)this; }
+    inline CDummy* AsDummy() { return (CDummy*)this; }
 
     // Member values
     union

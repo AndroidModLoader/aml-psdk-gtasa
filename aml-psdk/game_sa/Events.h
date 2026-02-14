@@ -55,6 +55,10 @@ struct Events
     DECL_EVENT_SYM_ARG1_PICK0(bool, initGameStage2Event, _ZN5CGame5Init2EPKc, const char*, datFile);
     DECL_EVENT_SYM_ARG1_PICK0(bool, initGameStage3Event, _ZN5CGame5Init3EPKc, const char*, datFile);
     DECL_EVENT_SYM_ARG1_PICK0(void, menuUpdateEvent, _ZN10MobileMenu6UpdateEv, void*, self);
+    DECL_EVENT_SYM_ARG0_PICK0(void, renderEffectsEvent, _Z13RenderEffectsv);
+    DECL_EVENT_SYM_ARG0_PICK0(void, renderSpecialEffectsEvent, _ZN10CSpecialFX6RenderEv);
+    DECL_EVENT_SYM_ARG0_PICK0(void, renderWeaponEffectsEvent, _ZN14CWeaponEffects6RenderEv);
+    DECL_EVENT_SYM_ARG0_PICK0(void, renderCoronasEvent, _ZN8CCoronas6RenderEv);
 };
 
 #endif // __AML_PSDK_SACALLEVENTS_H

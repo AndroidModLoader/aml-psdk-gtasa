@@ -6,7 +6,7 @@
 #include <aml-psdk/gta_base/DrawVertices.h>
 #include "RwVector.h"
 
-enum RwPrimitiveType : i32
+enum RwPrimitiveType : u32
 {
     rwPRIMTYPENAPRIMTYPE = 0,   /**<Invalid primative type */
     rwPRIMTYPELINELIST = 1,     /**<Unconnected line segments, each line is specified by
@@ -32,7 +32,7 @@ enum RwPrimitiveType : i32
                                  * for use by user-created pipelines */
 };
 
-enum RwRenderState : i32
+enum RwRenderState : u32
 {
     rwRENDERSTATENARENDERSTATE = 0,
 
@@ -185,6 +185,89 @@ enum RwRenderState : i32
          *  <i> Range is 0 to 255, mapped to the platform's actual range </i>
          * Default: 128 (PS2) 0 (GameCube, Xbox, D3D8, D3D9 and OpenGL).
          */
+};
+
+enum RwShadeMode : u32
+{
+    rwSHADEMODENASHADEMODE = 0,
+    rwSHADEMODEFLAT,                /**<Flat shading */
+    rwSHADEMODEGOURAUD,             /**<Gouraud shading */
+};
+
+enum RwCullMode : u32
+{
+    rwCULLMODENACULLMODE = 0,
+
+    rwCULLMODECULLNONE, 
+        /**<Both front and back-facing triangles are drawn. */
+    rwCULLMODECULLBACK, 
+        /**<Only front-facing triangles are drawn */
+    rwCULLMODECULLFRONT,
+        /**<Only back-facing triangles are drawn */
+};
+
+enum RwBlendFunction : u32
+{
+    rwBLENDNABLEND = 0,
+    rwBLENDZERO,            /**<(0,    0,    0,    0   ) */
+    rwBLENDONE,             /**<(1,    1,    1,    1   ) */
+    rwBLENDSRCCOLOR,        /**<(Rs,   Gs,   Bs,   As  ) */
+    rwBLENDINVSRCCOLOR,     /**<(1-Rs, 1-Gs, 1-Bs, 1-As) */
+    rwBLENDSRCALPHA,        /**<(As,   As,   As,   As  ) */
+    rwBLENDINVSRCALPHA,     /**<(1-As, 1-As, 1-As, 1-As) */
+    rwBLENDDESTALPHA,       /**<(Ad,   Ad,   Ad,   Ad  ) */
+    rwBLENDINVDESTALPHA,    /**<(1-Ad, 1-Ad, 1-Ad, 1-Ad) */
+    rwBLENDDESTCOLOR,       /**<(Rd,   Gd,   Bd,   Ad  ) */
+    rwBLENDINVDESTCOLOR,    /**<(1-Rd, 1-Gd, 1-Bd, 1-Ad) */
+    rwBLENDSRCALPHASAT,     /**<(f,    f,    f,    1   )  f = min (As, 1-Ad) */
+};
+
+enum RwTextureAddressMode : u32
+{
+    rwTEXTUREADDRESSNATEXTUREADDRESS = 0,
+    rwTEXTUREADDRESSWRAP,      /**<UV wraps (tiles) */
+    rwTEXTUREADDRESSMIRROR,    /**<Alternate UV is flipped */
+    rwTEXTUREADDRESSCLAMP,     /**<UV is clamped to 0-1 */
+    rwTEXTUREADDRESSBORDER,    /**<Border color takes effect outside of 0-1 */
+};
+
+enum RwTextureFilterMode : u32
+{
+    rwFILTERNAFILTERMODE = 0,
+    rwFILTERNEAREST,                /**<Point sampled */
+    rwFILTERLINEAR,                 /**<Bilinear */
+    rwFILTERMIPNEAREST,             /**<Point sampled per pixel mip map */
+    rwFILTERMIPLINEAR,              /**<Bilinear per pixel mipmap */
+    rwFILTERLINEARMIPNEAREST,       /**<MipMap interp point sampled */
+    rwFILTERLINEARMIPLINEAR,        /**<Trilinear */
+};
+
+enum RwAlphaTestFunction : u32
+{
+    rwALPHATESTFUNCTIONNAALPHATESTFUNCTION = 0,
+
+    rwALPHATESTFUNCTIONNEVER,         
+        /**<Always fail the test */
+    rwALPHATESTFUNCTIONLESS,          
+        /**<Accept the new pixel if its alpha value is less than the value of
+         *  the reference value */
+    rwALPHATESTFUNCTIONEQUAL,         
+        /**<Accept the new pixel if its alpha value equals the value of the
+         *  reference value */
+    rwALPHATESTFUNCTIONLESSEQUAL,     
+        /**<Accept the new pixel if its alpha value is less than or equal to 
+         *  the value of the reference value */
+    rwALPHATESTFUNCTIONGREATER,       
+        /**<Accept the new pixel if its alpha value is greater than the value 
+         *  of the reference value */
+    rwALPHATESTFUNCTIONNOTEQUAL,      
+        /**<Accept the new pixel if its alpha value does not equal the value of 
+         *  the reference value */
+    rwALPHATESTFUNCTIONGREATEREQUAL,  
+        /**<Accept the new pixel if its alpha value is greater than or equal
+         *  to the value of the reference value */
+    rwALPHATESTFUNCTIONALWAYS,        
+        /**<Always pass the test */
 };
 
 DECL_FASTCALL_SIMPLE_GLO(RwRenderStateSet, _Z16RwRenderStateSet13RwRenderStatePv, RwBool, RwRenderState state, void* value);

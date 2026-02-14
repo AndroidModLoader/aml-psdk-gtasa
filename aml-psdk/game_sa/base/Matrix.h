@@ -100,6 +100,14 @@ DECL_CLASS(CMatrix)
     inline const CVector& GetUp() const { return at; }
     inline CVector& GetPosition() { return pos; }
     inline const CVector& GetPosition() const { return pos; }
+    inline CVector operator*(CVector const& vector) const
+    {
+        CVector result;
+        result.x = this->right.x * vector.x + this->up.x * vector.y + this->at.x * vector.z;
+        result.y = this->right.y * vector.x + this->up.y * vector.y + this->at.y * vector.z;
+        result.z = this->right.z * vector.x + this->up.z * vector.y + this->at.z * vector.z;
+        return result;
+    }
 
     // Member values
     CVector   right;

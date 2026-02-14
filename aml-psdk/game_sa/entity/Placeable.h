@@ -82,6 +82,7 @@ DECL_CLASS_VTABLE(CPlaceable)
     inline const CVector& GetPosition() const { return m_matrix ? m_matrix->GetPosition() : m_placement.m_vPosn; }
     inline CVector& GetPosition() { return m_matrix ? m_matrix->GetPosition() : m_placement.m_vPosn; }
     inline CVector2D& GetPosition2D() { return GetPosition(); }
+    inline CMatrix* GetMatrix() { return m_matrix; }
 
     // Member values
     CSimpleTransform m_placement;
