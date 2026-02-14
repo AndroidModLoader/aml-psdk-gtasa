@@ -51,6 +51,7 @@ typedef int64_t i64;
 typedef uint64_t u64;
 typedef intptr_t iptr;
 typedef uintptr_t uptr;
+typedef uintptr_t FILESTREAM;
 
 #ifdef AML64
     #define CHECKSIZE(_cls, _s32, _s64) static_assert(sizeof(_cls)==_s64, "Validating size of " #_cls " is failed! " #_cls "'s size is not " #_s64)

@@ -3,7 +3,6 @@
 
 #include <aml-psdk/game_sa/plugin.h>
 
-#define FILESTREAM    uintptr_t
 #define DIRNAMELENGTH 128
 
 DECL_CLASS(CFileMgr)

@@ -40,6 +40,7 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/other/HandlingData.h>
 #include <aml-psdk/game_sa/engine/Fx.h>
 #include <aml-psdk/game_sa/engine/FxSystem.h>
+#include <aml-psdk/game_sa/engine/FxManager.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
