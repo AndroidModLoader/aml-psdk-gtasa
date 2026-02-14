@@ -7,6 +7,7 @@
 struct CEntity;
 struct CAEAudioEntity;
 struct CPed;
+struct FxSystem_c;
 
 enum eSoundEnvironment : unsigned short
 {
@@ -380,8 +381,35 @@ DECL_CLASS_BASED(CAEWeatherAudioEntity, CAEAudioEntity)
     DECL_THISCALL_HEAD(AddAudioEvent, _ZN21CAEWeatherAudioEntity13AddAudioEventEi, void, int AudioEvent)
     DECL_THISCALL_TAIL(AddAudioEvent, AudioEvent)
 
-    // Memebr values
+    // Member values
     i8 m_nLastThunderFrequencyIndex;
+DECL_CLASS_END()
+
+
+
+DECL_CLASS_BASED(CAEFireAudioEntity, CAEAudioEntity)
+    // STATIC functions
+    DECL_FASTCALL_SIMPLE(StaticInitialise, _ZN18CAEFireAudioEntity16StaticInitialiseEv, void);
+
+    // Member functions
+    DECL_THISCALL_SIMPLE(Terminate, _ZN18CAEFireAudioEntity9TerminateEv, void);
+
+    DECL_THISCALL_HEAD(Initialise, _ZN18CAEFireAudioEntity10InitialiseEP10FxSystem_c, void, FxSystem_c *pParent)
+    DECL_THISCALL_TAIL(Initialise, pParent)
+
+    DECL_THISCALL_HEAD(AddAudioEvent, _ZN18CAEFireAudioEntity13AddAudioEventEiR7CVector, void, int AudioEvent, CVector &vPosition)
+    DECL_THISCALL_TAIL(AddAudioEvent, AudioEvent, vPosition)
+
+    DECL_THISCALL_HEAD(PlayWaterSounds, _ZN18CAEFireAudioEntity15PlayWaterSoundsEiR7CVector, void, int AudioEvent, CVector &vPosition)
+    DECL_THISCALL_TAIL(PlayWaterSounds, AudioEvent, vPosition)
+
+    DECL_THISCALL_HEAD(PlayFireSounds, _ZN18CAEFireAudioEntity14PlayFireSoundsEiR7CVector, void, int AudioEvent, CVector &vPosition)
+    DECL_THISCALL_TAIL(PlayFireSounds, AudioEvent, vPosition)
+
+    // Member values
+    CAESound   *m_pFireSound;
+    CAESound   *m_pFireSound2;
+    FxSystem_c *m_pParentEffectSystem;
 DECL_CLASS_END()
 
 #endif // __AML_PSDK_SAAEAUDIOENTITY_H
