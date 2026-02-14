@@ -7,4 +7,12 @@
 
 #define RwRGBA CRGBA
 
+struct RwRGBAReal
+{
+    RwReal red;
+    RwReal green;
+    RwReal blue;
+    RwReal alpha;
+};
+
 #endif // __AML_PSDK_RWRGBA_H

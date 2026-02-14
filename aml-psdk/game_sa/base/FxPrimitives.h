@@ -4,7 +4,9 @@
 #include <aml-psdk/game_sa/plugin.h>
 #include <aml-psdk/gta_base/Vector.h>
 #include <aml-psdk/game_sa/base/Lists.h>
-#include <aml-psdk/renderware/RwVector.h>
+#include <aml-psdk/renderware/RwRGBA.h>
+
+struct FxSystem_c;
 
 struct FxBox_c
 {
@@ -29,6 +31,43 @@ struct FxPlane_c
 };
 
 struct Particle_c : ListItem_c {};
+
+struct FxEmitterPrt_c : Particle_c
+{
+    float         m_life;
+    float         m_currLife;
+    RwV3d         m_pos;
+    RwV3d         m_vel;
+    FxSystem_c   *m_fxSysPtr;
+    unsigned char m_multR;
+    unsigned char m_multG;
+    unsigned char m_multB;
+    unsigned char m_multA;
+    unsigned char m_multSize;
+    unsigned char m_multRot;
+    unsigned char m_randR;
+    unsigned char m_randG;
+    unsigned char m_randB;
+    unsigned char m_brightness;
+    unsigned char m_zRot;
+    unsigned char m_localToSystem;
+    float         m_currRot;
+};
+
+struct FxPrtMult_c
+{
+    FxPrtMult_c()
+    {
+        m_color.red = m_color.green = m_color.blue = m_color.alpha = 1.0f;
+        m_fSize = m_fRotation = m_fLife = 1.0f;
+    }
+
+    RwRGBAReal m_color;
+    float m_fSize;
+    float m_fRotation;
+    float m_fLife;
+};
+
 
 
 

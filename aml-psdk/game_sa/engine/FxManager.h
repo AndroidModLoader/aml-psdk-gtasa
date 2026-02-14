@@ -5,9 +5,11 @@
 #include <aml-psdk/game_sa/base/FxPrimitives.h>
 #include <aml-psdk/renderware/RwRGBA.h>
 
+struct RwCamera;
 struct FxSystem_c;
 struct FxEmitterPrt_c;
 struct RwMatrix;
+struct FxSystemBP_c;
 
 DECL_CLASS(FxMemoryPool_c)
     // Member functions
@@ -21,8 +23,8 @@ DECL_CLASS(FxMemoryPool_c)
 
     // Member values
     char *data;
-	unsigned int size;
-	unsigned int position;
+    unsigned int size;
+    unsigned int position;
 DECL_CLASS_END()
 
 DECL_CLASS(FxManager_c)
