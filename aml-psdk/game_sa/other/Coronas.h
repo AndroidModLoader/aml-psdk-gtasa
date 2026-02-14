@@ -32,6 +32,17 @@ enum eCoronaFlareType : unsigned char
 
 
 
+struct CFlareDefinition
+{
+    float Position;
+    float Size;
+    short RedMult;
+    short GreenMult;
+    short BlueMult;
+    short IntensityMult;
+    short Sprite;
+};
+
 DECL_CLASS(CRegisteredCorona)
     // Member functions
     DECL_THISCALL_SIMPLE(Update, _ZN17CRegisteredCorona6UpdateEv, void);
@@ -110,6 +121,8 @@ DECL_CLASS(CCoronas)
 DECL_CLASS_END()
 
 DECL_OBJECT_ARRAY_PLT_GLOBAL(RwTexture*, gpCoronaTexture, BYBIT(0x678ED0, 0x84FDC8) );
+DECL_OBJECT_ARRAY_PLT_GLOBAL(CFlareDefinition, SunFlareDef, BYBIT(0x676920, 0x84B290) );
+DECL_OBJECT_ARRAY_PLT_GLOBAL(CFlareDefinition, HeadLightsFlareDef, BYBIT(0x6794C8, 0x8509A8) );
 
 #define LightsMult LightsMult()
 #define ScreenMult ScreenMult()
@@ -121,5 +134,7 @@ DECL_OBJECT_ARRAY_PLT_GLOBAL(RwTexture*, gpCoronaTexture, BYBIT(0x678ED0, 0x84FD
 #define NumCoronas NumCoronas()
 #define aCoronas aCoronas()
 #define gpCoronaTexture gpCoronaTexture()
+#define SunFlareDef SunFlareDef()
+#define HeadLightsFlareDef HeadLightsFlareDef()
 
 #endif // __AML_PSDK_SACORONAS_H

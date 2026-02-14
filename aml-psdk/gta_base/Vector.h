@@ -248,6 +248,12 @@ struct CVector
     {
         *this = a.Cross(b);
     }
+    inline CVector Normalized() const
+    {
+        CVector ret = *this;
+        ret.Normalise();
+        return ret;
+    }
 };
 
 const CVector vectorNull(0, 0, 0);
