@@ -1,8 +1,8 @@
 #ifndef __AML_PSDK_SAENTITY_H
 #define __AML_PSDK_SAENTITY_H
 
-#include <aml-psdk/gta_base/Rect.h>
 #include "Placeable.h"
+#include <aml-psdk/gta_base/Rect.h>
 #include "../base/ColModel.h"
 #include "../engine/2dEffect.h"
 

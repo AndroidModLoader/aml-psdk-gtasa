@@ -59,6 +59,10 @@ struct Events
     DECL_EVENT_SYM_ARG0_PICK0(void, renderSpecialEffectsEvent, _ZN10CSpecialFX6RenderEv);
     DECL_EVENT_SYM_ARG0_PICK0(void, renderWeaponEffectsEvent, _ZN14CWeaponEffects6RenderEv);
     DECL_EVENT_SYM_ARG0_PICK0(void, renderCoronasEvent, _ZN8CCoronas6RenderEv);
+    DECL_EVENT_SYM_ARG0_PICK0(void, updateCoronasEvent, _ZN8CCoronas6UpdateEv);
+    DECL_EVENT_SYM_ARG0_PICK0(void, gameLogicUpdateEvent, _ZN10CGameLogic6UpdateEv);
+    DECL_EVENT_SYM_ARG0_PICK0(bool, preinitEngineEvent, _ZN5CGame22InitialiseOnceBeforeRWEv);
+    DECL_EVENT_SYM_ARG0_PICK0(int,  initEngineEvent, _Z12RsInitializev);
 };
 
 #endif // __AML_PSDK_SACALLEVENTS_H

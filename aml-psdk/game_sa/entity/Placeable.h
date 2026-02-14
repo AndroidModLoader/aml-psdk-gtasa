@@ -1,6 +1,7 @@
 #ifndef __AML_PSDK_SAPLACEABLE_H
 #define __AML_PSDK_SAPLACEABLE_H
 
+#include <aml-psdk/game_sa/plugin.h>
 #include "../base/Matrix.h"
 
 DECL_CLASS(CSimpleTransform)

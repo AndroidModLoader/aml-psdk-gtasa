@@ -17,7 +17,7 @@ DECL_CLASS(CSprite)
     DECL_FASTCALL_SIMPLE(InitSpriteBuffer, _ZN7CSprite16InitSpriteBufferEv, void);
     DECL_FASTCALL_SIMPLE(InitSpriteBuffer2D, _ZN7CSprite18InitSpriteBuffer2DEv, void);
     DECL_FASTCALL_SIMPLE(RenderBufferedOneXLUSprite, _ZN7CSprite26RenderBufferedOneXLUSpriteEfffffhhhsfh, void,
-        float ScreenX, float ScreenY, float ScreenZ,float SizeX, float SizeY, u8 R, u8 G, u8 B, i16 Intensity16, float RecipZ, u8 Alpha);
+        float ScreenX, float ScreenY, float ScreenZ, float SizeX, float SizeY, u8 R, u8 G, u8 B, i16 Intensity16, float RecipZ, u8 Alpha);
     DECL_FASTCALL_SIMPLE(RenderOneXLUSprite, _ZN7CSprite18RenderOneXLUSpriteEfffffhhhsfhhhff, void,
         float ScreenX, float ScreenY, float ScreenZ, float SizeX, float SizeY, u8 R, u8 G, u8 B, i16 Intensity16, float RecipZ, u8 Alpha, u8 FlipU, u8 FlipV, float uvPad1, float uvPad2);
     DECL_FASTCALL_SIMPLE(RenderBufferedOneXLUSprite_Rotate_Aspect, _ZN7CSprite40RenderBufferedOneXLUSprite_Rotate_AspectEfffffhhhsffh, void,

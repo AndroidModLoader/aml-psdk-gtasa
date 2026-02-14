@@ -4,4 +4,4 @@
 #define BASE_GAME_LIBRARY "libGTASA.so"
 #include <aml-psdk/sdk_base.h>
 
-#endif
+#endif // __AML_PSDK_GAMEPLUGINROOT_H

@@ -1,5 +1,5 @@
-#ifndef __AML_PSDK_SACORONAEXTENDER_H
-#define __AML_PSDK_SACORONAEXTENDER_H
+#ifndef __AML_PSDK_SACORONASEXTENDER_H
+#define __AML_PSDK_SACORONASEXTENDER_H
 
 #include <aml-psdk/game_sa/other/Coronas.h>
 #include <aml-psdk/game_sa/other/Weather.h>
@@ -18,20 +18,19 @@ struct CoronasExtender
     CoronasExtender()
     {
         Events::renderCoronasEvent.after += DrawExtCoronasCB;
-        Events::gameProcessEvent.after += UpdateExtCoronasCB;
+        Events::updateCoronasEvent.after += UpdateExtCoronasCB;
     }
 
     // The functions you should use
-    template<typename A1>
-    static inline void RegisterCorona(A1 ID, CEntity *pAttachedToEntity, u8 R, u8 G, u8 B, u8 Intensity, CVector const& Coors, float Size,
+    static inline void RegisterCorona(uintptr_t ID, CEntity *pAttachedToEntity, u8 R, u8 G, u8 B, u8 Intensity, CVector const& Coors, float Size,
         float Range, eCoronaType CoronaType, eCoronaFlareType FlareType, u8 ReflType, u8 LOSCheck, u8 UsesTrails, float fNormalAngle,
         bool bNeonFade, float ArgPullTowardsCam, bool bFullBrightAtStart, float FadeSpeed, bool bOnlyFromBelow, bool bWhiteCore)
     {
-        RegisterCorona(ID, pAttachedToEntity, R, G, B, Intensity, Coors, Size, Range, CoronaType, gpCoronaTexture[FlareType], ReflType, LOSCheck,
+        RegisterCorona(ID, pAttachedToEntity, R, G, B, Intensity, Coors, Size, Range, gpCoronaTexture[CoronaType], FlareType, ReflType, LOSCheck,
             UsesTrails, fNormalAngle, bNeonFade, ArgPullTowardsCam, bFullBrightAtStart, FadeSpeed, bOnlyFromBelow, bWhiteCore);
     }
-    template<typename A1>
-    static inline void RegisterCorona(A1 ID, CEntity *pAttachedToEntity, u8 R, u8 G, u8 B, u8 Intensity, CVector const& Coors, float Size,
+    
+    static inline void RegisterCorona(uintptr_t ID, CEntity *pAttachedToEntity, u8 R, u8 G, u8 B, u8 Intensity, CVector const& Coors, float Size,
         float Range, RwTexture *pCoronaTex, eCoronaFlareType FlareType, u8 ReflType, u8 LOSCheck, u8 UsesTrails, float fNormalAngle,
         bool bNeonFade, float ArgPullTowardsCam, bool bFullBrightAtStart, float FadeSpeed, bool bOnlyFromBelow, bool bWhiteCore)
     {
@@ -87,6 +86,7 @@ struct CoronasExtender
             corona->m_bOffScreen       = true;
             corona->m_bReflectionDelay = false;
             corona->m_bJustCreated     = true;
+            corona->m_dwId             = ID;
         }
 
         corona->m_Color                = CRGBA(R, G, B, alpha);
@@ -130,7 +130,7 @@ struct CoronasExtender
             if(!c.m_dwId || (!c.m_nFadeState && !c.m_Color.a) ) continue;
 
             CVector cpos = c.m_vPosn;
-            if(c.m_pAttachedTo || !c.m_pAttachedTo->GetMatrix())
+            if(c.m_pAttachedTo && c.m_pAttachedTo->GetMatrix())
             {
                 CMatrix* mat = c.m_pAttachedTo->GetMatrix();
                 if(c.m_pAttachedTo->IsVehicle() && c.m_pAttachedTo->AsVehicle()->IsSubBike())
@@ -147,9 +147,7 @@ struct CoronasExtender
                 continue;
             }
 
-            float lerpFade = (c.m_fFarClip - onScrPos.z) / (onScrPos.z / 2.0f - onScrPos.z);
-            if(lerpFade > 1.0f) lerpFade = 1.0f;
-            else if(lerpFade < 0.0f) lerpFade = 0.0f;
+            const float lerpFade = clampfloat(0.0f, 1.0f, (onScrPos.z - c.m_fFarClip) / (c.m_fFarClip / 2.0f - c.m_fFarClip) );
             const short intensity = (short)((float)c.m_nFadeState * lerpFade);
             const float rz = 1.0f / onScrPos.z;
 
@@ -159,16 +157,16 @@ struct CoronasExtender
                 RwRenderStateSet(rwRENDERSTATEZTESTENABLE, (void*)(intptr_t)zTestEnable);
             }
 
-            if(c.m_pTexture)
+            if(c.m_pTexture && intensity > 0)
             {
                 RwRenderStateSet(rwRENDERSTATEZTESTENABLE,   (void*)true);
                 RwRenderStateSet(rwRENDERSTATETEXTURERASTER, *(void**)c.m_pTexture);
                 const float scale = fminf(40.0f, onScrPos.z) * CWeather::Foggyness / 40.0f + 1.0f;
                 const float colorScale = 1.0f / scale;
 
-                if(CSprite::CalcScreenCoors(
-                    cpos - (cpos - TheCamera.GetPosition()).Normalized() * c.m_fNearClip,
-                    &onScrPos, &onScrSize.x, &onScrSize.y, true, true) )
+                CVector worldPos = ( (c.m_fNearClip != 0.0f) ? (cpos - (cpos - TheCamera.GetPosition()).Normalized() * c.m_fNearClip) : (cpos) );
+
+                if(CSprite::CalcScreenCoors(worldPos, &onScrPos, &onScrSize.x, &onScrSize.y, true, true))
                 {
                     CSprite::RenderOneXLUSprite_Rotate_Aspect(
                         onScrPos.x, onScrPos.y, onScrPos.z,
@@ -178,8 +176,8 @@ struct CoronasExtender
                         colorScale * c.m_Color.g,
                         colorScale * c.m_Color.b,
                         intensity,
-                        rz * 20.f,
-                        0.f,
+                        rz * 20.0f,
+                        0.0f,
                         255
                     );
                 }
@@ -204,7 +202,6 @@ struct CoronasExtender
             if(c.m_dwId)
             {
                 // NOT using m_aCoronas[i].Update() as it's using CCoronas' values inside
-
                 if(!c.m_bRegisteredThisFrame) c.m_Color.a = 0;
                 if(c.m_bAttached && !c.m_pAttachedTo)
                 {
@@ -259,4 +256,4 @@ struct CoronasExtender
     static inline int m_nCoronasNum = 0;
 } g_CoronasExtender;
 
-#endif // __AML_PSDK_SACORONAEXTENDER_H
+#endif // __AML_PSDK_SACORONASEXTENDER_H
