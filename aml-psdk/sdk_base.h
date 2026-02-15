@@ -357,8 +357,14 @@ inline Type GetMainLibrarySymbol(const char* sym)
 #define DECL_FASTCALL_SIMPLE(_name, _sym, _ret, ...) \
     static inline auto _name = GetMainLibrarySymbol<_ret(*)(__VA_ARGS__)>(#_sym)
 
+#define DECL_FASTCALL_SIMPLE_PLT(_name, _addr, _ret, ...) \
+    static inline auto _name = (_ret(*)(__VA_ARGS__))(GetMainLibraryAddress() + _addr)
+
 #define DECL_FASTCALL_SIMPLE_GLO(_name, _sym, _ret, ...) \
     inline auto _name = GetMainLibrarySymbol<_ret(*)(__VA_ARGS__)>(#_sym)
+
+#define DECL_FASTCALL_SIMPLE_GLO_PLT(_name, _sym, _ret, ...) \
+    inline auto _name = (_ret(*)(__VA_ARGS__))(GetMainLibraryAddress() + _addr)
 
 #define GET_THISCALL_ADDR(_clsName, _name) \
     ( (uintptr_t)( _clsName::FuncProxy_##_name ) )

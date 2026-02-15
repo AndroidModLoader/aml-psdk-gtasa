@@ -8,6 +8,7 @@
 #include <aml-psdk/game_sa/engine/World.h>
 #include <aml-psdk/game_sa/engine/Sprite.h>
 #include <aml-psdk/game_sa/base/Timer.h>
+#include <aml-psdk/game_sa/engine/RsGlobal.h>
 #include <aml-psdk/renderware/RwRender.h>
 #include "../Events.h"
 
@@ -123,7 +124,11 @@ struct CoronasExtender
         RwRenderStateSet(rwRENDERSTATEDESTBLEND,         (void*)rwBLENDONE);
         RwRenderStateSet(rwRENDERSTATEZTESTENABLE,       (void*)true);
 
+        CRect screenRect { 0.0f, 0.0f, (float)RsGlobal.maximumWidth, (float)RsGlobal.maximumHeight };
+        CVector2D halfscreen { 0.5f * RsGlobal.maximumWidth, 0.5f * RsGlobal.maximumHeight };
+
         bool zTestEnable = true;
+        const CVector& camPos = TheCamera.GetPosition();
         for(int i = 0; i < MAX_EXT_CORONAS_STORAGE; ++i)
         {
             CRegisteredCorona& c = m_aCoronas[i];
@@ -164,7 +169,7 @@ struct CoronasExtender
                 const float scale = fminf(40.0f, onScrPos.z) * CWeather::Foggyness / 40.0f + 1.0f;
                 const float colorScale = 1.0f / scale;
 
-                CVector worldPos = ( (c.m_fNearClip != 0.0f) ? (cpos - (cpos - TheCamera.GetPosition()).Normalized() * c.m_fNearClip) : (cpos) );
+                CVector worldPos = ( (c.m_fNearClip != 0.0f) ? (cpos - (cpos - camPos).Normalized() * c.m_fNearClip) : (cpos) );
 
                 if(CSprite::CalcScreenCoors(worldPos, &onScrPos, &onScrSize.x, &onScrSize.y, true, true))
                 {
@@ -183,8 +188,51 @@ struct CoronasExtender
                 }
             }
 
-            // TODO: Flare
+            // Flare (TODO: need to test!)
             if(c.m_nFlareType != FLARETYPE_NONE)
+            {
+                RwRenderStateSet(rwRENDERSTATEZTESTENABLE, (void*)false);
+                RwRenderStateSet(rwRENDERSTATETEXTURERASTER, *(void**)(gpCoronaTexture[CORONATYPE_SHINYSTAR]));
+
+                CFlareDefinition* flare;
+                switch(c.m_nFlareType)
+                {
+                    case FLARETYPE_HEADLIGHTS: flare = &HeadLightsFlareDef[0]; break;
+                    case FLARETYPE_SUN:        flare = &SunFlareDef[0]; break;
+                    default: continue;
+                }
+
+                float colorMult = (1.3f * rand()) / (float)RAND_MAX;
+                colorMult = (colorMult - 0.3f) * c.m_nFadeState;
+
+                CColPoint hitCP;
+                CEntity* hitEntity;
+                while(flare->Sprite)
+                {
+                    if(!CWorld::ProcessLineOfSight(cpos, camPos, hitCP, hitEntity, false, true, true, false, false, false, false, true))
+                    {
+                        const CRGBA flareColor(
+                            (u8)( c.m_Color.r * colorMult * flare->RedMult ),
+                            (u8)( c.m_Color.g * colorMult * flare->GreenMult ),
+                            (u8)( c.m_Color.b * colorMult * flare->BlueMult ),
+                            255);
+                        CSprite::RenderBufferedOneXLUSprite2D(
+                            onScrPos.x * flare->Position + halfscreen.x * (1.f - flare->Position),
+                            onScrPos.y * flare->Position + halfscreen.y * (1.f - flare->Position),
+                            flare->Size * 4.0f,
+                            flare->Size * 4.0f,
+                            flareColor,
+                            255,
+                            255
+                        );
+                    }
+                    ++flare;
+                }
+            }
+
+            // TODO: HeadlightsSpectrum (do we need this..?)
+            RwRenderStateSet(rwRENDERSTATEZTESTENABLE, (void*)true);
+            if(c.m_nFlareType == FLARETYPE_HEADLIGHTS && CWeather::HeadLightsSpectrum != 0.0f && CGame::CanSeeOutSideFromCurrArea())
             {
 
             }

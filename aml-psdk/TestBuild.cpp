@@ -43,6 +43,8 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/engine/FxManager.h>
 #include <aml-psdk/game_sa/other/Coronas.h>
 #include <aml-psdk/game_sa/extdata/CoronasExtender.h>
+#include <aml-psdk/game_sa/engine/PointLights.h>
+#include <aml-psdk/game_sa/engine/Shadows.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
