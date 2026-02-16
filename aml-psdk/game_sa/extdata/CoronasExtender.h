@@ -6,6 +6,7 @@
 #include <aml-psdk/game_sa/entity/Camera.h>
 #include <aml-psdk/game_sa/entity/Bike.h>
 #include <aml-psdk/game_sa/engine/World.h>
+#include <aml-psdk/game_sa/engine/Game.h>
 #include <aml-psdk/game_sa/engine/Sprite.h>
 #include <aml-psdk/game_sa/base/Timer.h>
 #include <aml-psdk/game_sa/engine/RsGlobal.h>
@@ -202,8 +203,8 @@ struct CoronasExtender
                     default: continue;
                 }
 
-                float colorMult = (1.3f * rand()) / (float)RAND_MAX;
-                colorMult = (colorMult - 0.3f) * c.m_nFadeState;
+                float colorMult = 0.3f * ((float)rand() / (float)RAND_MAX);
+                colorMult = ((colorMult + 0.7f) * c.m_nFadeState) / 65536.0f;
 
                 CColPoint hitCP;
                 CEntity* hitEntity;

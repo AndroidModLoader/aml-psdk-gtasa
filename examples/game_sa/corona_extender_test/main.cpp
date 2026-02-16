@@ -42,6 +42,6 @@ ON_MOD_LOAD()
             0.2f, 100.0f, CORONATYPE_SHINYSTAR, FLARETYPE_NONE, 0, 0, 0, 0.0f, false, 0.0f, false, 1.0f, false, true);
 
         CoronasExtender::RegisterCorona((uintptr_t)p + 0x1243 + off++, p, 255, 255, 255, 255, CVector(-1,1,0),
-            0.2f, 100.0f, CORONATYPE_SHINYSTAR, FLARETYPE_NONE, 0, 0, 0, 0.0f, false, 0.0f, false, 1.0f, false, true);
+            0.2f, 100.0f, CORONATYPE_SHINYSTAR, FLARETYPE_SUN, 0, 0, 0, 0.0f, false, 0.0f, false, 1.0f, false, true);
     };
 }
