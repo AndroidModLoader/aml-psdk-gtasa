@@ -264,7 +264,7 @@ struct CoronasExtender
                 {
                     if(c.m_bOffScreen || (c.m_bOnlyFromBelow && camPos.z > c.m_vPosn.z) )
                     {
-                        c.m_nFadeState = (u8)(std::max(0.f, (float)c.m_nFadeState - fadeStep));
+                        c.m_nFadeState = (u8)(fmaxf(0.0f, (float)c.m_nFadeState - fadeStep));
                     }
                     else
                     {
@@ -276,18 +276,18 @@ struct CoronasExtender
                         {
                             if(c.m_nFadeState > c.m_Color.a)
                             {
-                                c.m_nFadeState = (u8)(std::max((float)c.m_Color.a, (float)c.m_nFadeState - fadeStep));
+                                c.m_nFadeState = (u8)(fmaxf((float)c.m_Color.a, (float)c.m_nFadeState - fadeStep));
                             }
                             else
                             {
-                                c.m_nFadeState = (u8)(std::min((float)c.m_Color.a, (float)c.m_nFadeState + fadeStep));
+                                c.m_nFadeState = (u8)(fminf((float)c.m_Color.a, (float)c.m_nFadeState + fadeStep));
                             }
                         }
                     }
                 }
                 else
                 {
-                    c.m_nFadeState = (u8)(std::max(0.f, (float)c.m_nFadeState - fadeStep));
+                    c.m_nFadeState = (u8)(fmaxf(0.0f, (float)c.m_nFadeState - fadeStep));
                 }
 
                 if(!c.m_nFadeState && !c.m_bJustCreated)
