@@ -63,6 +63,7 @@ struct Events
     DECL_EVENT_SYM_ARG0_PICK0(void, gameLogicUpdateEvent, _ZN10CGameLogic6UpdateEv);
     DECL_EVENT_SYM_ARG0_PICK0(bool, preinitEngineEvent, _ZN5CGame22InitialiseOnceBeforeRWEv);
     DECL_EVENT_SYM_ARG0_PICK0(int,  initEngineEvent, _Z12RsInitializev);
+    DECL_EVENT_SYM_ARG4_PICK4(void, touchScreenEvent, _Z14AND_TouchEventiiii, int, actionType, int, trackNum, int, x, int, y); // !!! NOT THREAD SAFE !!!
 };
 
 #endif // __AML_PSDK_SACALLEVENTS_H

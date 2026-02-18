@@ -51,6 +51,8 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/renderware/RwRaster.h>
 #include <aml-psdk/renderware/RwImage.h>
 #include <aml-psdk/game_sa/other/TextureDatabase.h>
+#include <aml-psdk/game_sa/engine/OS.h>
+#include <aml-psdk/game_sa/utils/ThreadSyncer.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
@@ -82,4 +84,17 @@ void Test()
     Command<0x0936>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 100, true); // CAMERA_SET_VECTOR_MOVE
     Command<Commands::GET_ACTIVE_CAMERA_POINT_AT>(&cx, &cy, &cz);
     Command<0x0000>(); // NOP
+
+    Events::touchScreenEvent += [](int actionType, int trackNum, int x, int y)
+    {
+        ThreadSyncer::PushToMain
+        (
+            [=]()
+            {
+                char str[256];
+                snprintf(str, sizeof(str), "actionType=%d trackNum=%d x=%d y=%d", actionType, trackNum, x, y);
+                OS_DebugOut(str);
+            }
+        );
+    };
 }

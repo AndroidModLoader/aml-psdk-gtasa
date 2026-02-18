@@ -4,19 +4,10 @@
 #include <aml-psdk/game_sa/base/Lists.h>
 #include <aml-psdk/gta_base/Vector.h>
 #include <aml-psdk/gta_base/RGBA.h>
+#include "OS.h"
 
 struct MenuScreen;
 struct RwTexture;
-
-enum OSPointerState : i32
-{
-    OSPS_ButtonInvalid = -1,
-    OSPS_ButtonReleased = 0,
-    OSPS_ButtonUp,
-    OSPS_ButtonPressed,
-    OSPS_ButtonDown,
-};
-
 
 DECL_CLASS(MobileMenu)
     // Construct/Deconstruct functions

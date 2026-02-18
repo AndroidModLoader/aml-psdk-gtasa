@@ -267,4 +267,31 @@
         } \
     DECL_EVENT_BASE_END(_name)
 
+#define DECL_EVENT_SYM_ARG4_PICK4(_ret, _name, _sym, _t1, _v1, _t2, _v2, _t3, _v3, _t4, _v4) \
+    DECL_EVENT_BASE(_name) \
+        typedef void (EventType)(_t1 _v1, _t2 _v2, _t3 _v3, _t4 _v4); \
+        DECL_EVENT_SYM(_ret, _sym, _t1 _v1, _t2 _v2, _t3 _v3, _t4 _v4) \
+        inline void CallBefore(_t1 _v1, _t2 _v2, _t3 _v3, _t4 _v4) { \
+            for(auto fn : before.m_list) fn(_v1, _v2, _v3, _v4); \
+        } \
+        inline void CallAfter(_t1 _v1, _t2 _v2, _t3 _v3, _t4 _v4) { \
+            for(auto fn : after.m_list) fn(_v1, _v2, _v3, _v4); \
+        } \
+        template<typename RetType = _ret> \
+        static inline RetType EventExecutedImpl(_t1 _v1, _t2 _v2, _t3 _v3, _t4 _v4) { \
+            _name.CallBefore(_v1, _v2, _v3, _v4); \
+            if constexpr (std::is_same_v<RetType, void>) { \
+                _name.m_pOriginalFunc(_v1, _v2, _v3, _v4); \
+                _name.CallAfter(_v1, _v2, _v3, _v4); \
+            } else { \
+                RetType ret = _name.m_pOriginalFunc(_v1, _v2, _v3, _v4); \
+                _name.CallAfter(_v1, _v2, _v3, _v4); \
+                return ret; \
+            } \
+        } \
+        static inline _ret EventExecuted(_t1 _v1, _t2 _v2, _t3 _v3, _t4 _v4) { \
+            return EventExecutedImpl(_v1, _v2, _v3, _v4); \
+        } \
+    DECL_EVENT_BASE_END(_name)
+
 #endif // __AML_PSDK_CALLEVENTS_H
