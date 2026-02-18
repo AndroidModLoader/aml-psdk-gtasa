@@ -2,7 +2,7 @@
 #define __AML_PSDK_SAOPCODECALLER_H
 
 #include <aml-psdk/game_sa/engine/RunningScript.h>
-#include "OpcodeCalledIDs.h"
+#include "OpcodeCallerIDs.h"
 
 struct ZeroArg {};
 
@@ -105,7 +105,6 @@ inline bool CommandByID(uint16_t opcode, ArgTypes... args)
     OpcodeCaller::g_nVarsCount = 0;
     PushVars(args...);
 
-    OpcodeCaller::g_Script.m_bNotFlag = ((opcode & 0x8000) != 0);
     OpcodeCaller::g_Script.ProcessOneCommand();
     if(OpcodeCaller::g_nVarsCount)
     {
@@ -128,7 +127,6 @@ inline bool Command()
 {
     const uint16_t opcode = CommandID;
     memcpy(OpcodeCaller::g_ScriptBuffer, &opcode, 2);
-    OpcodeCaller::g_Script.m_bNotFlag = ((opcode & 0x8000) != 0);
     OpcodeCaller::g_Script.ProcessOneCommand();
     return OpcodeCaller::g_Script.m_bCondResult;
 }

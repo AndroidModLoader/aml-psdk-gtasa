@@ -1,19 +1,11 @@
 #ifndef __AML_PSDK_RWVECTOR_H
 #define __AML_PSDK_RWVECTOR_H
 
-#include <aml-psdk/game_sa/plugin.h>
 #include <aml-psdk/gta_base/Vector.h>
+#include "RwBase.h"
 
 #define RwV2d CVector2D
 #define RwV3d CVector
-#define RwInt32 i32
-#define RwUInt32 u32
-#define RwInt16 i16
-#define RwUInt16 u16
-#define RwInt8 i8
-#define RwUInt8 u8
-#define RwBool i32
-#define RwReal float
 
 union RQVector
 {

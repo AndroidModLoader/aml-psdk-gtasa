@@ -5,6 +5,8 @@
 
 enum Commands : uint32_t
 {
+    NOT_FLAG = 0x8000,
+
     NOP = 0x0000,
     WAIT = 0x0001,
     GOTO = 0x0002,
