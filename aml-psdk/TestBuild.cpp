@@ -46,6 +46,7 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/engine/PointLights.h>
 #include <aml-psdk/game_sa/engine/Shadows.h>
 #include <aml-psdk/game_sa/other/CutsceneMgr.h>
+#include <aml-psdk/game_sa/utils/OpcodeCaller.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
@@ -71,4 +72,10 @@ void Test()
 
     RwIm2DVertex vert2d;
     RwIm3DVertex vert3d;
+
+    float cx, cy, cz;
+    Command<Commands::CAMERA_SET_VECTOR_MOVE>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 100, true);
+    Command<0x0936>(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 100, true); // CAMERA_SET_VECTOR_MOVE
+    Command<Commands::GET_ACTIVE_CAMERA_POINT_AT>(&cx, &cy, &cz);
+    Command<0x0000>(); // NOP
 }

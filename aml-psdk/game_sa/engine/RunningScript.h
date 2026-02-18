@@ -269,6 +269,7 @@ DECL_CLASS(CRunningScript)
     bool            m_bUseMissionCleanup;
     bool            m_bIsExternal;
     bool            m_bTextBlockOverride;
+    char            m_nScriptBrainType; // missing on PC
     int             m_nWakeTime;
     unsigned short  m_nLogicalOp;
     bool            m_bNotFlag;
