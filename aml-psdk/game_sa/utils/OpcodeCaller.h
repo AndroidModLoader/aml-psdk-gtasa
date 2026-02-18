@@ -83,7 +83,8 @@ struct OpcodeCaller
     static inline u32* g_ScriptVarPointers[40] { NULL };
     static inline uint16_t g_nBufferPos = 0;
     static inline uint8_t g_nVarsCount = 0;
-} g_OpcodeCaller;
+};
+inline OpcodeCaller g_OpcodeCallerStub;
 
 template <typename T>
 inline void PushVars(T arg)

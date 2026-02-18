@@ -303,6 +303,7 @@ struct CoronasExtender
     }
     static inline CRegisteredCorona m_aCoronas[MAX_EXT_CORONAS_STORAGE] { 0 };
     static inline int m_nCoronasNum = 0;
-} g_CoronasExtender;
+};
+inline CoronasExtender g_CoronasExtenderStub;
 
 #endif // __AML_PSDK_SACORONASEXTENDER_H
