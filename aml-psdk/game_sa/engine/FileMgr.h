@@ -44,11 +44,13 @@ DECL_CLASS(CFileMgr)
     DECL_VALUE_PLT_I32(ms_dualLayer, BYBIT(0x6790DC, 0x8501E0));
     DECL_VALUE_PLT_U32(ms_layerStart, BYBIT(0x679F0C, 0x851E28));
 DECL_CLASS_END()
+DECL_OBJECT_ARRAY_PLT_GLOBAL(char, StorageRootBuffer, BYBIT(0x6796A0, 0x850D50) );
 
 #define fileDataArea fileDataArea()
 #define ms_rootDirName ms_rootDirName()
 #define ms_dirName ms_dirName()
 #define ms_dualLayer ms_dualLayer()
 #define ms_layerStart ms_layerStart()
+#define StorageRootBuffer StorageRootBuffer()
 
 #endif // __AML_PSDK_SAFILEMGR_H
