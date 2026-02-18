@@ -50,6 +50,7 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/renderware/RwTexture.h>
 #include <aml-psdk/renderware/RwRaster.h>
 #include <aml-psdk/renderware/RwImage.h>
+#include <aml-psdk/game_sa/other/TextureDatabase.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
