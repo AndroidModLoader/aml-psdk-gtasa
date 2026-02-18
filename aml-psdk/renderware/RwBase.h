@@ -1,6 +1,8 @@
 #ifndef __AML_PSDK_RWBASE_H
 #define __AML_PSDK_RWBASE_H
 
+#include <aml-psdk/sdk_base.h>
+
 #define RwInt32 i32
 #define RwUInt32 u32
 #define RwInt16 i16
@@ -10,6 +12,7 @@
 #define RwBool i32
 #define RwReal float
 #define RwChar char
+#define RwFixed i64
 
 struct RwRect
 {

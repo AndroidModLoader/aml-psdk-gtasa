@@ -12,11 +12,6 @@ struct RwTexDictionary;
 struct RwStream;
 struct RwImage;
 
-typedef RwTexture *(*RwTextureCallBackFind)(const char *);
-typedef RwRaster *(*RwTextureCallBackMipmapGeneration)(RwRaster *, RwImage *);
-typedef RwBool (*RwTextureCallBackMipmapName)(RwChar *, RwChar *, RwUInt8, RwInt32);
-typedef RwTexture *(*RwTextureCallBackRead)(const char *, const char *);
-
 struct RwTexture
 {
     RwRaster           *raster; /** pointer to RwRaster with data */
@@ -31,6 +26,11 @@ struct RwTexture
 
     RwInt32             refCount; /* Reference count, surprisingly enough */
 };
+
+typedef RwTexture *(*RwTextureCallBackFind)(const char *);
+typedef RwRaster *(*RwTextureCallBackMipmapGeneration)(RwRaster *, RwImage *);
+typedef RwBool (*RwTextureCallBackMipmapName)(RwChar *, RwChar *, RwUInt8, RwInt32);
+typedef RwTexture *(*RwTextureCallBackRead)(const char *, const char *);
 
 DECL_FASTCALL_SIMPLE_GLO(RwTextureCreate, _Z15RwTextureCreateP8RwRaster, RwTexture*, RwRaster *);
 DECL_FASTCALL_SIMPLE_GLO(RwTextureDestroy, _Z16RwTextureDestroyP9RwTexture, RwBool, RwTexture *);

@@ -49,6 +49,7 @@ MYMOD(net.psdk.mymod.guid, AML PSDK Template, 1.0, Author)
 #include <aml-psdk/game_sa/utils/OpcodeCaller.h>
 #include <aml-psdk/renderware/RwTexture.h>
 #include <aml-psdk/renderware/RwRaster.h>
+#include <aml-psdk/renderware/RwImage.h>
 
 DECL_HOOKv(CCamera__Process, CCamera* self)
 {
