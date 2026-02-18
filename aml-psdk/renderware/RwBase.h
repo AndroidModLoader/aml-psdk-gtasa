@@ -11,6 +11,15 @@
 #define RwReal float
 #define RwChar char
 
+struct RwRect
+{
+    RwInt32 x;
+    RwInt32 y;
+    RwInt32 w;
+    RwInt32 h;
+};
+
+
 struct RwStream;
 
 typedef void *(*RwPluginObjectConstructor)(void *, RwInt32, RwInt32);
