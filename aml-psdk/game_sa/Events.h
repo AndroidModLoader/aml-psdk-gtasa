@@ -7,6 +7,7 @@
 struct CCamera;
 struct CVehicle;
 struct CPed;
+struct CObject;
 struct MobileMenu;
 
 struct Events

@@ -5,6 +5,10 @@
 #include <aml-psdk/game_sa/base/Lists.h>
 #include <jni.h>
 
+#define TOUCH_UNPRESS 1
+#define TOUCH_PRESS 2
+#define TOUCH_MOVE 3
+
 enum OSFileArchive : i32
 {
     OSFA_Application = 0x0,
