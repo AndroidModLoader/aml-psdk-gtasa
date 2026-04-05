@@ -15,6 +15,7 @@ struct Events
 {
     // PC psdk events (they are slightly different from PC. Please keep that in mind!)
     DECL_EVENT_PLT_ARG0_PICK0(void, restartGameEvent, BYBIT(0x674E38, 0x848318));
+    DECL_EVENT_SYM_ARG0_PICK0(void, renderEffectsEvent, _Z13RenderEffectsv);
     DECL_EVENT_PLT_ARG0_PICK0(void, drawingEvent, BYBIT(0x675CC4, 0x849AB0));
     DECL_EVENT_PLT_ARG0_PICK0(void, drawHudEvent, BYBIT(0x6737EC, 0x845EC8));
     DECL_EVENT_PLT_ARG0_PICK0(void, drawAfterFadeEvent, BYBIT(0x673C4C, 0x846618));
@@ -57,7 +58,6 @@ struct Events
     DECL_EVENT_SYM_ARG1_PICK0(bool, initGameStage2Event, _ZN5CGame5Init2EPKc, const char*, datFile);
     DECL_EVENT_SYM_ARG1_PICK0(bool, initGameStage3Event, _ZN5CGame5Init3EPKc, const char*, datFile);
     DECL_EVENT_SYM_ARG1_PICK0(void, menuUpdateEvent, _ZN10MobileMenu6UpdateEv, void*, self);
-    DECL_EVENT_SYM_ARG0_PICK0(void, renderEffectsEvent, _Z13RenderEffectsv);
     DECL_EVENT_SYM_ARG0_PICK0(void, renderSpecialEffectsEvent, _ZN10CSpecialFX6RenderEv);
     DECL_EVENT_SYM_ARG0_PICK0(void, renderWeaponEffectsEvent, _ZN14CWeaponEffects6RenderEv);
     DECL_EVENT_SYM_ARG0_PICK0(void, renderCoronasEvent, _ZN8CCoronas6RenderEv);

@@ -9,6 +9,8 @@
 #include <mod/amlmod.h>
 #include <stdint.h>
 #include <math.h>
+#include <type_traits>
+#include <utility>
 
 #include "sdk_basetypes.h"
 
@@ -37,6 +39,14 @@ template<typename Type = void*>
 inline Type GetMainLibrarySymbol(const char* sym)
 {
     return (Type)aml->GetSym(GetMainLibrary(), sym);
+}
+
+template<typename Ret = void, typename... Args>
+inline Ret CallFnVariadic(uintptr_t address, Args&&... args)
+{
+    using FuncPtr = Ret(*)(Args...);
+    FuncPtr func = (FuncPtr)(address);
+    return func(std::forward<Args>(args)...);
 }
 
 #define DECL_VALUE_HEAD(_type, _name) \
